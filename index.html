@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GE International LLC — Global Trade & Logistics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:#E2DDDA;color:#1C3E4E;font-family:'Inter',sans-serif;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit;border:none;background:none}
+input,textarea,select{font-family:inherit}
+
+/* ── PAGES ── */
+.page{display:none;min-height:100vh}
+.page.active{display:block;animation:pageIn .45s ease both}
+@keyframes pageIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── NAVBAR ── */
+#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 2rem;height:68px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,backdrop-filter .4s,box-shadow .4s}
+#navbar.transparent{background:transparent}
+#navbar.glass{background:rgba(226,221,218,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(40,92,112,.1)}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.nav-logo-box{width:34px;height:34px;border-radius:8px;background:#285C70;display:flex;align-items:center;justify-content:center;color:#F2EDEA;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.04em;flex-shrink:0}
+.nav-logo-text{font-family:'DM Sans',sans-serif;font-weight:500;font-size:.9rem;letter-spacing:-.01em;transition:color .3s}
+#navbar.transparent .nav-logo-text{color:#F2EDEA}
+#navbar.glass .nav-logo-text{color:#1C3E4E}
+.nav-links{display:flex;align-items:center;gap:.25rem}
+.nav-link{padding:.4rem .85rem;border-radius:8px;font-size:.875rem;cursor:pointer;transition:background .2s,color .2s;white-space:nowrap;background:none;border:none}
+#navbar.transparent .nav-link{color:rgba(242,237,234,.8)}
+#navbar.transparent .nav-link:hover{background:rgba(255,255,255,.1);color:#F2EDEA}
+#navbar.glass .nav-link{color:#3F5A66}
+#navbar.glass .nav-link:hover{background:rgba(40,92,112,.08);color:#1C3E4E}
+.nav-cta{padding:.5rem 1.2rem;border-radius:9999px;background:#285C70;color:#F2EDEA !important;font-size:.875rem;font-weight:500;cursor:pointer;transition:background .2s,box-shadow .2s;white-space:nowrap;border:none;box-shadow:0 0 14px rgba(40,92,112,.4)}
+.nav-cta:hover{background:#1C3E4E;box-shadow:0 0 22px rgba(40,92,112,.6)}
+.nav-services-wrap{position:relative}
+.nav-services-wrap::after{content:'';position:absolute;top:100%;left:-60px;width:340px;height:8px}
+.mega-menu{position:absolute;top:calc(100% + 8px);left:-60px;width:340px;background:rgba(226,221,218,.97);backdrop-filter:blur(14px);border:1px solid rgba(40,92,112,.12);border-radius:16px;padding:1rem;box-shadow:0 12px 40px rgba(0,0,0,.12);opacity:0;pointer-events:none;transform:translateY(-6px);transition:opacity .25s,transform .25s}
+.nav-services-wrap:hover .mega-menu{opacity:1;pointer-events:all;transform:translateY(0)}
+.mega-item{display:flex;align-items:flex-start;gap:12px;padding:.7rem .8rem;border-radius:10px;cursor:pointer;transition:background .2s}
+.mega-item:hover{background:rgba(40,92,112,.08)}
+.mega-icon{width:36px;height:36px;border-radius:9px;background:rgba(40,92,112,.1);border:1px solid rgba(81,115,128,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#517380}
+.mega-label{font-size:.82rem;font-weight:500;color:#1C3E4E;font-family:'DM Sans',sans-serif}
+.mega-sub{font-size:.72rem;color:#737575;margin-top:2px}
+.nav-chevron{display:inline-block;margin-left:3px;transition:transform .2s}
+.nav-services-wrap:hover .nav-chevron{transform:rotate(180deg)}
+/* Mobile */
+#mobile-toggle{display:none;flex-direction:column;gap:5px;padding:.5rem;cursor:pointer}
+#mobile-toggle span{display:block;width:22px;height:2px;background:#F2EDEA;border-radius:2px;transition:.3s}
+#navbar.glass #mobile-toggle span{background:#1C3E4E}
+#mobile-menu{display:none;position:fixed;inset:0;background:#0d0d0d;z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem}
+#mobile-menu.open{display:flex}
+.mobile-link{font-family:'DM Sans',sans-serif;font-size:1.6rem;color:#F2EDEA;font-weight:300;cursor:pointer;transition:color .2s}
+.mobile-link:hover{color:#6692A4}
+#mobile-close{position:absolute;top:1.5rem;right:1.5rem;color:#737575;cursor:pointer;font-size:1.5rem}
+
+/* ── HERO ── */
+.hero{background:#0d0d0d;min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(40,92,112,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(40,92,112,.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none}
+.glow-orb{position:absolute;border-radius:50%;pointer-events:none;animation:glowPulse 7s ease-in-out infinite}
+.glow-orb-alt{position:absolute;border-radius:50%;pointer-events:none;animation:glowPulse 9s ease-in-out infinite 2s}
+@keyframes glowPulse{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.12)}}
+.hero-content{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:0 2rem;text-align:center}
+.hero-h1{font-family:'DM Sans',sans-serif;font-weight:700;font-size:clamp(3rem,9vw,8rem);color:#F2EDEA;line-height:1;letter-spacing:-.03em;margin-bottom:.15em}
+.hero-h1 span{font-weight:300}
+.hero-sub{color:#A1A1A1;font-size:clamp(.9rem,1.7vw,1.1rem);max-width:440px;margin:0 auto 3rem;line-height:1.7}
+.hero-sub strong{color:#F2EDEA;font-weight:400}
+.hero-stats{margin-top:4.5rem;display:flex;justify-content:center;gap:clamp(2rem,6vw,5rem);flex-wrap:wrap}
+.stat-val{font-family:'DM Sans',sans-serif;font-weight:700;font-size:clamp(1.5rem,3vw,2.2rem);color:#F2EDEA;text-shadow:0 0 30px rgba(81,115,128,.5)}
+.stat-label{color:#737575;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;margin-top:4px}
+
+/* ── BUTTONS ── */
+.btn-primary{display:inline-flex;align-items:center;gap:8px;padding:.8rem 1.8rem;border-radius:9999px;background:#285C70;color:#F2EDEA;font-size:.875rem;font-weight:500;cursor:pointer;transition:background .25s,box-shadow .3s;border:none;text-decoration:none;box-shadow:0 0 16px rgba(40,92,112,.45),0 2px 8px rgba(40,92,112,.3)}
+.btn-primary:hover{background:#1C3E4E;box-shadow:0 0 28px rgba(40,92,112,.7),0 4px 16px rgba(40,92,112,.4)}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;padding:.8rem 1.8rem;border-radius:9999px;background:transparent;color:#F2EDEA;font-size:.875rem;font-weight:500;cursor:pointer;border:1px solid rgba(242,237,234,.25);transition:border-color .25s,box-shadow .3s;text-decoration:none}
+.btn-outline:hover{border-color:rgba(242,237,234,.5);box-shadow:0 0 16px rgba(242,237,234,.08)}
+.btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.buy-btn{display:inline-block;padding:5px 12px;border-radius:9999px;background:#285C70;color:#F2EDEA;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;box-shadow:0 0 14px rgba(40,92,112,.45);transition:box-shadow .25s}
+.buy-btn:hover{box-shadow:0 0 24px rgba(40,92,112,.7)}
+.sell-btn{display:inline-block;padding:5px 12px;border-radius:9999px;background:transparent;border:1px solid rgba(40,92,112,.3);color:#3F5A66;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:box-shadow .25s,border-color .25s}
+.sell-btn:hover{box-shadow:0 0 16px rgba(81,115,128,.3);border-color:rgba(81,115,128,.6)}
+.buy-btn-lg{display:inline-block;padding:7px 18px;border-radius:9999px;background:#285C70;color:#F2EDEA;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;box-shadow:0 0 14px rgba(40,92,112,.45);transition:box-shadow .25s}
+.sell-btn-lg{display:inline-block;padding:7px 18px;border-radius:9999px;background:transparent;border:1px solid rgba(40,92,112,.35);color:#285C70;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:box-shadow .25s}
+.btn-ghost-light{display:inline-flex;align-items:center;gap:8px;padding:.75rem 1.5rem;border-radius:9999px;background:rgba(242,237,234,.1);border:1px solid rgba(242,237,234,.22);color:#F2EDEA;font-size:.875rem;text-decoration:none;transition:background .25s}
+.btn-ghost-light:hover{background:rgba(242,237,234,.18)}
+
+/* ── SECTION HELPERS ── */
+.section-light{background:#E2DDDA;padding:clamp(5rem,10vw,8rem) 0;position:relative;overflow:hidden}
+.section-dark{background:#111111;padding:clamp(5rem,10vw,8rem) 0;position:relative;overflow:hidden}
+.section-teal{background:#1C3E4E;padding:clamp(5rem,10vw,8rem) 0;position:relative;overflow:hidden}
+.section-deepblue{background:#285C70;padding:clamp(6rem,12vw,10rem) 0 clamp(4rem,8vw,6rem);position:relative;overflow:hidden}
+.dark-header{background:#111111;padding:clamp(6rem,12vw,10rem) 0 clamp(4rem,8vw,6rem);position:relative;overflow:hidden}
+.teal-header{background:#1C3E4E;padding:clamp(6rem,12vw,10rem) 0 clamp(4rem,8vw,6rem);position:relative;overflow:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem;position:relative;z-index:1}
+.glow-accent-line{width:60px;height:2px;background:linear-gradient(90deg,#285C70,rgba(81,115,128,.4));border-radius:9999px;box-shadow:0 0 10px rgba(40,92,112,.6);margin-bottom:20px}
+.glow-accent-line-light{width:60px;height:2px;background:linear-gradient(90deg,rgba(242,237,234,.6),rgba(81,115,128,.3));border-radius:9999px;box-shadow:0 0 10px rgba(242,237,234,.2);margin-bottom:20px}
+
+/* ── TYPOGRAPHY ── */
+.page-h1{font-family:'DM Sans',sans-serif;font-weight:700;color:#F2EDEA;font-size:clamp(2.5rem,6vw,5rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:1.5rem;max-width:640px}
+.page-h1 .accent{color:#6692A4}
+.page-sub{color:#8AAAB8;font-size:clamp(.9rem,1.6vw,1.05rem);max-width:520px;line-height:1.7}
+.section-h2{font-family:'DM Sans',sans-serif;font-weight:700;color:#111111;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:-.03em;line-height:1.1}
+.section-h2 .accent{color:#285C70}
+.section-h2-light{font-family:'DM Sans',sans-serif;font-weight:700;color:#F2EDEA;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:-.03em;line-height:1.1}
+.section-h2-light .accent{color:#6692A4}
+.tag-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#517380;font-family:'Inter',sans-serif}
+
+/* ── CARDS ── */
+.card{background:#EDEBE8;border:1px solid rgba(40,92,112,.12);border-radius:16px;overflow:hidden;transition:box-shadow .4s,border-color .4s,transform .35s}
+.card:hover{border-color:rgba(81,115,128,.4);box-shadow:0 0 0 1px rgba(81,115,128,.18),0 8px 40px rgba(40,92,112,.18),0 0 80px rgba(40,92,112,.07);transform:translateY(-3px)}
+.card-body{padding:1.5rem}
+.card-img{height:180px;overflow:hidden;position:relative}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.card:hover .card-img img{transform:scale(1.04)}
+.card-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(28,62,78,.35) 100%)}
+.card-icon{width:32px;height:32px;border-radius:8px;background:rgba(40,92,112,.1);border:1px solid rgba(81,115,128,.22);display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(40,92,112,.15);color:#517380}
+.card-title{font-family:'DM Sans',sans-serif;font-weight:500;color:#1C3E4E;font-size:1.1rem;letter-spacing:-.02em;margin:.85rem 0 .5rem}
+.card-desc{color:#737575;font-size:.8rem;line-height:1.65;margin-bottom:1rem}
+.btn-row-sm{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ── SERVICE CARDS (tall) ── */
+.svc-card{background:#EDEBE8;border:1px solid rgba(40,92,112,.12);border-radius:20px;overflow:hidden;transition:box-shadow .4s,border-color .4s,transform .35s;margin-bottom:20px}
+.svc-card:hover{border-color:rgba(81,115,128,.35);box-shadow:0 0 0 1px rgba(81,115,128,.15),0 8px 40px rgba(40,92,112,.15);transform:translateY(-2px)}
+.svc-img{height:240px;overflow:hidden;position:relative}
+.svc-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.svc-card:hover .svc-img img{transform:scale(1.03)}
+.svc-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.08) 0%,rgba(28,62,78,.6) 100%)}
+.svc-img-bottom-glow{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to top,rgba(40,92,112,.25),transparent)}
+.svc-img-tag{position:absolute;bottom:20px;left:24px;display:flex;align-items:center;gap:10px}
+.svc-img-tag-icon{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(81,115,128,.4);color:#F2EDEA}
+.svc-img-tag-text{color:#F2EDEA;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;text-shadow:0 0 10px rgba(0,0,0,.5)}
+.svc-body{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;padding:clamp(1.5rem,3vw,2rem);align-items:start}
+@media(max-width:640px){.svc-body{grid-template-columns:1fr;gap:1.5rem}}
+.svc-h2{font-family:'DM Sans',sans-serif;font-weight:600;color:#1C3E4E;font-size:clamp(1.3rem,2.5vw,1.8rem);letter-spacing:-.02em;margin-bottom:.9rem}
+.svc-desc{color:#737575;font-size:.875rem;line-height:1.75;margin-bottom:1.4rem}
+.cap-label{color:#517380;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.9rem}
+.cap-list{display:flex;flex-direction:column;gap:10px}
+.cap-item{display:flex;align-items:center;gap:10px}
+.cap-dot{width:20px;height:20px;border-radius:50%;background:rgba(40,92,112,.1);border:1px solid rgba(81,115,128,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 0 8px rgba(81,115,128,.15);color:#517380}
+.cap-text{color:#3F5A66;font-size:.855rem}
+
+/* ── VENTURES CARDS ── */
+.venture-card{background:#EDEBE8;border:1px solid rgba(40,92,112,.1);border-radius:18px;overflow:hidden;transition:box-shadow .4s,border-color .4s,transform .35s}
+.venture-card:hover{border-color:rgba(81,115,128,.35);box-shadow:0 0 0 1px rgba(81,115,128,.15),0 8px 40px rgba(40,92,112,.14);transform:translateY(-3px)}
+.venture-img{height:160px;overflow:hidden;position:relative}
+.venture-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.venture-card:hover .venture-img img{transform:scale(1.05)}
+.venture-img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(28,62,78,.35) 100%)}
+.venture-body{padding:1.5rem}
+.venture-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.9rem}
+.venture-icon{width:40px;height:40px;border-radius:10px;background:rgba(40,92,112,.1);border:1px solid rgba(81,115,128,.18);display:flex;align-items:center;justify-content:center;color:#517380}
+.status-pill{padding:3px 10px;border-radius:9999px;background:rgba(40,92,112,.08);border:1px solid rgba(40,92,112,.18);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:#285C70}
+.venture-title{font-family:'DM Sans',sans-serif;font-weight:500;color:#1C3E4E;font-size:1.1rem;letter-spacing:-.02em;margin-bottom:.5rem}
+.venture-desc{color:#737575;font-size:.82rem;line-height:1.65}
+
+/* ── EXPORT GALLERY ── */
+.gallery-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:240px 240px;gap:12px;margin-bottom:60px}
+@media(max-width:768px){.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}}
+.gallery-item{border-radius:16px;overflow:hidden;position:relative}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery-span{grid-row:1/3}
+.gallery-label{position:absolute;bottom:14px;left:14px;padding:5px 12px;border-radius:9999px;background:rgba(17,17,17,.75);color:#F2EDEA;font-size:.7rem}
+
+/* ── PROCESS STEPS ── */
+.process-step{display:flex;gap:2rem;align-items:flex-start;padding:1.5rem 0;border-bottom:1px solid rgba(28,62,78,.35)}
+.process-step:last-child{border-bottom:none}
+.step-num{color:#285C70;font-family:'DM Sans',sans-serif;font-weight:700;font-size:1.1rem;min-width:36px;padding-top:2px}
+.step-title{font-family:'DM Sans',sans-serif;font-weight:500;color:#F2EDEA;font-size:1rem;margin-bottom:.4rem}
+.step-desc{color:#737575;font-size:.82rem;line-height:1.65}
+.step-arrow{color:#285C70;flex-shrink:0;margin-top:4px}
+
+/* ── MARQUEE ── */
+.marquee-band{background:#285C70;padding:14px 0;overflow:hidden}
+.marquee-inner{overflow:hidden;white-space:nowrap}
+.marquee-text{display:inline-block;animation:marquee 35s linear infinite;color:rgba(242,237,234,.6);font-size:.65rem;letter-spacing:.22em}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:3rem}}
+.about-body p{color:#3F5A66;font-size:.92rem;line-height:1.75;margin-bottom:1.2rem}
+.cred-strip{margin-top:2.5rem;padding:1.5rem;border-radius:14px;background:#EDEBE8;border:1px solid rgba(40,92,112,.12)}
+.cred-label{color:#517380;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;display:block;margin-bottom:.6rem}
+.cred-title{color:#1C3E4E;font-size:.9rem;font-weight:500}
+.cred-sub{color:#737575;font-size:.78rem;margin-top:.25rem}
+.stat-strip{margin-top:1.75rem;display:flex;gap:1.5rem;flex-wrap:wrap}
+.stat-box{text-align:center;padding:1rem 1.5rem;border-radius:12px;background:#EDEBE8;border:1px solid rgba(40,92,112,.1)}
+.stat-box-val{font-family:'DM Sans',sans-serif;font-weight:700;color:#285C70;font-size:1.5rem}
+.stat-box-label{color:#737575;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.trust-card{padding:1.5rem;border-radius:14px;background:#EDEBE8;border:1px solid rgba(40,92,112,.1)}
+.trust-icon{width:40px;height:40px;border-radius:10px;background:rgba(40,92,112,.1);border:1px solid rgba(81,115,128,.2);display:flex;align-items:center;justify-content:center;margin-bottom:.9rem;color:#517380}
+.trust-title{font-family:'DM Sans',sans-serif;font-weight:500;color:#1C3E4E;font-size:.92rem;margin-bottom:.4rem}
+.trust-desc{color:#737575;font-size:.78rem;line-height:1.6}
+
+/* ── CONTACT ── */
+.contact-grid{display:grid;grid-template-columns:2fr 1fr;gap:2.5rem;align-items:start}
+@media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
+.contact-form-card{background:#EDEBE8;border:1px solid rgba(40,92,112,.1);border-radius:20px;padding:clamp(1.5rem,4vw,2.5rem)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:560px){.form-row{grid-template-columns:1fr}}
+.form-group{margin-bottom:14px}
+.form-label{display:block;color:#517380;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.45rem}
+.form-input{background:#F2EDEA;border:1px solid rgba(40,92,112,.18);border-radius:10px;color:#1C3E4E;padding:12px 14px;font-size:.875rem;width:100%;outline:none;transition:border-color .2s;font-family:'Inter',sans-serif}
+.form-input:focus{border-color:rgba(81,115,128,.5)}
+.form-textarea{resize:vertical;min-height:130px}
+.contact-side{display:flex;flex-direction:column;gap:14px}
+.contact-info-box{padding:1.5rem;border-radius:14px;background:#EDEBE8;border:1px solid rgba(40,92,112,.1)}
+.contact-info-item{display:flex;align-items:flex-start;gap:14px;padding:1.25rem;border-radius:14px;background:#EDEBE8;border:1px solid rgba(40,92,112,.1)}
+.contact-icon{width:36px;height:36px;border-radius:9px;background:rgba(40,92,112,.1);border:1px solid rgba(81,115,128,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#517380}
+.contact-info-label{color:#517380;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.2rem}
+.contact-info-val{color:#3F5A66;font-size:.855rem}
+.success-state{text-align:center;padding:3rem 0}
+.success-icon{width:60px;height:60px;border-radius:50%;background:rgba(40,92,112,.1);border:1px solid rgba(81,115,128,.25);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;color:#517380}
+.success-title{font-family:'DM Sans',sans-serif;font-weight:500;color:#1C3E4E;font-size:1.4rem;margin-bottom:.6rem}
+.success-desc{color:#737575;font-size:.875rem}
+
+/* ── FOOTER ── */
+#footer{background:#0d0d0d;padding:3rem 0 2rem;position:relative;overflow:hidden}
+.footer-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.5rem;margin-bottom:2rem}
+.footer-logo{font-family:'DM Sans',sans-serif;font-weight:700;color:#F2EDEA;font-size:1rem}
+.footer-links{display:flex;gap:1.5rem;flex-wrap:wrap}
+.footer-link{color:#737575;font-size:.8rem;cursor:pointer;transition:color .2s}
+.footer-link:hover{color:#8AAAB8}
+.footer-copy{color:#4A4A4A;font-size:.75rem;border-top:1px solid rgba(255,255,255,.06);padding-top:1.5rem;text-align:center}
+
+/* ── GRIDS ── */
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.grid-5{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+@media(max-width:768px){.grid-2{grid-template-columns:1fr;gap:2rem}}
+.grid-4-sm{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+/* ── DARK BANNER ── */
+.dark-banner-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+@media(max-width:768px){.dark-banner-grid{grid-template-columns:1fr}}
+.dark-banner-h2{font-family:'DM Sans',sans-serif;font-weight:300;color:#F2EDEA;font-size:clamp(1.5rem,4vw,2.5rem);letter-spacing:-.02em;margin-bottom:.9rem}
+.dark-banner-p{color:#737575;font-size:.875rem;line-height:1.7}
+.mini-card{padding:1rem 1.25rem;border-radius:10px;background:rgba(28,62,78,.3);border:1px solid rgba(40,92,112,.3);color:#D0CCC9;font-size:.82rem}
+
+/* ── INDUSTRIES ── */
+.industry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.industry-chip{padding:1.5rem 1.25rem;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;flex-direction:column;align-items:flex-start;gap:.85rem;transition:background .3s,border-color .3s,transform .3s}
+.industry-chip:hover{background:rgba(255,255,255,.07);border-color:rgba(102,146,164,.4);transform:translateY(-3px)}
+.industry-icon{width:38px;height:38px;border-radius:10px;background:rgba(102,146,164,.12);border:1px solid rgba(102,146,164,.25);display:flex;align-items:center;justify-content:center;color:#8AAAB8}
+.industry-label{color:#F2EDEA;font-size:.85rem;font-weight:500;font-family:'DM Sans',sans-serif}
+
+/* ── GLOBAL REACH ── */
+.reach-visual{border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:1.5rem;position:relative;overflow:hidden}
+.reach-stats-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:1.75rem}
+.reach-region{display:flex;align-items:center;justify-content:space-between;padding:.7rem .95rem;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);margin-bottom:8px}
+.reach-region-name{color:#D0CCC9;font-size:.8rem}
+.reach-region-val{color:#8AAAB8;font-size:.75rem;font-family:'DM Sans',sans-serif;font-weight:600}
+
+/* ── TESTIMONIALS ── */
+.testimonial-card{padding:1.75rem;border-radius:16px;background:#EDEBE8;border:1px solid rgba(40,92,112,.1);display:flex;flex-direction:column;gap:1.1rem;transition:box-shadow .35s,transform .35s,border-color .35s}
+.testimonial-card:hover{transform:translateY(-3px);border-color:rgba(81,115,128,.3);box-shadow:0 8px 32px rgba(40,92,112,.12)}
+.testimonial-text{color:#3F5A66;font-size:.86rem;line-height:1.75}
+.testimonial-author{display:flex;align-items:center;gap:12px}
+.testimonial-avatar{width:40px;height:40px;border-radius:50%;background:#285C70;color:#F2EDEA;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.8rem;flex-shrink:0}
+.testimonial-name{color:#1C3E4E;font-size:.83rem;font-weight:500;font-family:'DM Sans',sans-serif}
+.testimonial-role{color:#737575;font-size:.72rem;margin-top:1px}
+
+/* ── CTA BANNER ── */
+.cta-banner-inner{text-align:center;max-width:640px;margin:0 auto}
+.cta-banner-h2{font-family:'DM Sans',sans-serif;font-weight:700;color:#F2EDEA;font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:1.1rem}
+.cta-banner-p{color:rgba(242,237,234,.75);font-size:.95rem;line-height:1.7;margin-bottom:2.25rem}
+
+/* ── VENTURES DETAIL ── */
+.venture-mission{color:#517380;font-size:.75rem;font-style:italic;margin:-.2rem 0 .8rem;line-height:1.5}
+.venture-svc-list{display:flex;flex-direction:column;gap:6px;margin:.8rem 0 1rem}
+.venture-svc-item{display:flex;align-items:center;gap:8px;color:#3F5A66;font-size:.78rem}
+.venture-svc-dot{width:5px;height:5px;border-radius:50%;background:#285C70;flex-shrink:0}
+.venture-benefits{display:flex;gap:6px;flex-wrap:wrap}
+.venture-benefit-tag{padding:3px 9px;border-radius:9999px;background:rgba(40,92,112,.08);border:1px solid rgba(40,92,112,.15);color:#285C70;font-size:.62rem;letter-spacing:.04em}
+
+/* ── ROADMAP / TARGET CLIENTS ── */
+.roadmap-phase{display:flex;gap:1.25rem;align-items:flex-start;padding:1.1rem 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.roadmap-phase:last-child{border-bottom:none}
+.roadmap-phase-num{width:32px;height:32px;border-radius:50%;background:rgba(102,146,164,.12);border:1px solid rgba(102,146,164,.3);display:flex;align-items:center;justify-content:center;color:#8AAAB8;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.8rem;flex-shrink:0}
+.roadmap-phase-title{color:#F2EDEA;font-size:.92rem;font-weight:500;font-family:'DM Sans',sans-serif;margin-bottom:.2rem}
+.roadmap-phase-desc{color:#8AAAB8;font-size:.78rem;line-height:1.6}
+.target-list{display:flex;flex-direction:column;gap:10px}
+.target-item{display:flex;align-items:center;gap:12px;padding:.85rem 1rem;border-radius:12px;background:#EDEBE8;border:1px solid rgba(40,92,112,.1)}
+.target-icon{width:32px;height:32px;border-radius:8px;background:rgba(40,92,112,.1);border:1px solid rgba(81,115,128,.2);display:flex;align-items:center;justify-content:center;color:#517380;flex-shrink:0}
+.target-text{color:#3F5A66;font-size:.85rem}
+
+/* ── MISSION / VISION ── */
+.mv-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+@media(max-width:768px){.mv-grid{grid-template-columns:1fr}}
+.mv-card{padding:2rem;border-radius:18px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+.mv-icon{width:44px;height:44px;border-radius:12px;background:rgba(102,146,164,.14);border:1px solid rgba(102,146,164,.3);display:flex;align-items:center;justify-content:center;color:#8AAAB8;margin-bottom:1.1rem}
+.mv-title{font-family:'DM Sans',sans-serif;font-weight:600;color:#F2EDEA;font-size:1.15rem;margin-bottom:.6rem}
+.mv-text{color:#8AAAB8;font-size:.85rem;line-height:1.75}
+
+/* ── VALUES ── */
+.value-card{padding:1.5rem;border-radius:14px;background:#EDEBE8;border:1px solid rgba(40,92,112,.1);text-align:left}
+.value-icon{width:38px;height:38px;border-radius:10px;background:rgba(40,92,112,.1);border:1px solid rgba(81,115,128,.2);display:flex;align-items:center;justify-content:center;color:#517380;margin-bottom:.9rem}
+.value-title{font-family:'DM Sans',sans-serif;font-weight:500;color:#1C3E4E;font-size:.95rem;margin-bottom:.4rem}
+.value-desc{color:#737575;font-size:.78rem;line-height:1.6}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:1px;background:rgba(255,255,255,.12)}
+.timeline-item{position:relative;padding-bottom:2rem}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-dot{position:absolute;left:-2rem;top:4px;width:11px;height:11px;border-radius:50%;background:#285C70;box-shadow:0 0 0 4px rgba(40,92,112,.2)}
+.timeline-year{color:#8AAAB8;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.35rem}
+.timeline-title{color:#F2EDEA;font-family:'DM Sans',sans-serif;font-weight:500;font-size:1rem;margin-bottom:.35rem}
+.timeline-desc{color:#737575;font-size:.82rem;line-height:1.65;max-width:480px}
+
+/* ── FAQ ── */
+.faq-item{border-bottom:1px solid rgba(40,92,112,.12)}
+.faq-item:last-child{border-bottom:none}
+.faq-q{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.25rem 0;cursor:pointer}
+.faq-q-text{color:#1C3E4E;font-family:'DM Sans',sans-serif;font-weight:500;font-size:.92rem}
+.faq-chevron{color:#517380;transition:transform .3s;flex-shrink:0}
+.faq-item.open .faq-chevron{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a-text{color:#737575;font-size:.85rem;line-height:1.7;padding-bottom:1.25rem;padding-right:2rem}
+
+/* ── CONTACT EXTRAS ── */
+.process-mini-row{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:space-between}
+.process-mini-item{flex:1;min-width:180px;display:flex;gap:12px;align-items:flex-start}
+.process-mini-num{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#F2EDEA;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.8rem;flex-shrink:0}
+.process-mini-title{color:#F2EDEA;font-size:.85rem;font-weight:500;font-family:'DM Sans',sans-serif;margin-bottom:.2rem}
+.process-mini-desc{color:rgba(242,237,234,.65);font-size:.75rem;line-height:1.6}
+.hq-card{border-radius:18px;overflow:hidden;position:relative;height:280px}
+.hq-card img{width:100%;height:100%;object-fit:cover}
+.hq-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,13,.85),rgba(13,13,13,.2) 55%,rgba(13,13,13,.5))}
+.hq-card-content{position:absolute;bottom:0;left:0;right:0;padding:1.75rem}
+.hq-card-label{color:#8AAAB8;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.5rem}
+.hq-card-title{color:#F2EDEA;font-family:'DM Sans',sans-serif;font-weight:600;font-size:1.2rem}
+
+/* ── SERVICE GALLERY ── */
+.svc-gallery{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(2,150px);gap:6px;position:relative}
+@media(min-width:640px){.svc-gallery{grid-template-rows:repeat(2,170px)}}
+.svc-gallery-item{position:relative;overflow:hidden;cursor:pointer;border-radius:4px}
+.svc-gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s;display:block}
+.svc-gallery-item:hover img{transform:scale(1.07)}
+.svc-gallery-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,13,.5),transparent 55%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;justify-content:flex-end;padding:8px}
+.svc-gallery-item:hover .svc-gallery-item-overlay{opacity:1}
+.svc-gallery-expand-icon{width:26px;height:26px;border-radius:7px;background:rgba(13,13,13,.6);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;color:#F2EDEA}
+.svc-gallery-tag{position:absolute;top:12px;left:12px;z-index:2;display:flex;align-items:center;gap:9px;pointer-events:none}
+.svc-gallery-tag-icon{width:34px;height:34px;border-radius:9px;background:rgba(13,13,13,.55);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px rgba(0,0,0,.3);color:#F2EDEA}
+.svc-gallery-tag-text{color:#F2EDEA;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;text-shadow:0 0 10px rgba(0,0,0,.6)}
+
+/* ── LIGHTBOX ── */
+.lightbox{display:none;position:fixed;inset:0;z-index:2000;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox-backdrop{position:absolute;inset:0;background:rgba(13,13,13,.92);backdrop-filter:blur(4px)}
+.lightbox img{position:relative;max-width:88vw;max-height:80vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5);z-index:1}
+.lightbox-close{position:absolute;top:1.5rem;right:1.5rem;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:#F2EDEA;z-index:2;transition:background .2s;cursor:pointer}
+.lightbox-close:hover{background:rgba(255,255,255,.18)}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;color:#F2EDEA;z-index:2;transition:background .2s;cursor:pointer}
+.lightbox-nav:hover{background:rgba(255,255,255,.18)}
+.lightbox-prev{left:1.5rem}
+.lightbox-next{right:1.5rem}
+.lightbox-counter{position:absolute;bottom:1.25rem;left:50%;transform:translateX(-50%);color:rgba(242,237,234,.7);font-size:.72rem;letter-spacing:.12em;z-index:2}
+@media(max-width:640px){.lightbox-nav{width:38px;height:38px}.lightbox-prev{left:.5rem}.lightbox-next{right:.5rem}.lightbox-close{top:1rem;right:1rem}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){.nav-links{display:none}#mobile-toggle{display:flex}}
+@media(max-width:640px){.hero-h1{font-size:clamp(2.2rem,10vw,4rem)}}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════ NAVBAR ══════════════════════ -->
+<nav id="navbar" class="transparent">
+  <div class="nav-logo" onclick="navigate('home')">
+    <div class="nav-logo-box">GE</div>
+    <span class="nav-logo-text">GE International</span>
+  </div>
+
+  <div class="nav-links">
+    <div class="nav-services-wrap">
+      <button class="nav-link">Services <span class="nav-chevron">&#8964;</span></button>
+      <div class="mega-menu">
+        <div class="mega-item" onclick="navigate('services')">
+          <div class="mega-icon"><i data-lucide="recycle" width="16" height="16"></i></div>
+          <div><div class="mega-label">Scrap &amp; Materials</div><div class="mega-sub">Ferrous, non-ferrous &amp; commodities</div></div>
+        </div>
+        <div class="mega-item" onclick="navigate('services')">
+          <div class="mega-icon"><i data-lucide="cog" width="16" height="16"></i></div>
+          <div><div class="mega-label">Heavy Machinery</div><div class="mega-sub">Equipment sourcing &amp; logistics</div></div>
+        </div>
+        <div class="mega-item" onclick="navigate('services')">
+          <div class="mega-icon"><i data-lucide="stethoscope" width="16" height="16"></i></div>
+          <div><div class="mega-label">Electromedical</div><div class="mega-sub">Hospital asset recovery</div></div>
+        </div>
+      </div>
+    </div>
+    <button class="nav-link" onclick="navigate('exports')">Global Exports</button>
+    <button class="nav-link" onclick="navigate('about')">About</button>
+    <button class="nav-cta" onclick="navigate('contact')">Contact</button>
+  </div>
+
+  <div id="mobile-toggle" onclick="openMobile()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu">
+  <span id="mobile-close" onclick="closeMobile()">&#10005;</span>
+  <div style="color:#517380;font-size:.65rem;letter-spacing:.24em;margin-bottom:.5rem">01</div>
+  <div class="mobile-link" onclick="navigate('services');closeMobile()">Services</div>
+  <div style="color:#517380;font-size:.65rem;letter-spacing:.24em;margin:.5rem 0">02</div>
+  <div class="mobile-link" onclick="navigate('exports');closeMobile()">Global Exports</div>
+  <div style="color:#517380;font-size:.65rem;letter-spacing:.24em;margin:.5rem 0">03</div>
+  <div class="mobile-link" onclick="navigate('ventures');closeMobile()">Ventures</div>
+  <div style="color:#517380;font-size:.65rem;letter-spacing:.24em;margin:.5rem 0">04</div>
+  <div class="mobile-link" onclick="navigate('about');closeMobile()">About</div>
+  <button class="btn-primary" style="margin-top:1.5rem" onclick="navigate('contact');closeMobile()">Contact Us</button>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+  <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
+  <button class="lightbox-close" onclick="closeLightbox()"><i data-lucide="x" width="20" height="20"></i></button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)"><i data-lucide="chevron-left" width="22" height="22"></i></button>
+  <img id="lightbox-img" src="" alt="" />
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)"><i data-lucide="chevron-right" width="22" height="22"></i></button>
+  <div class="lightbox-counter" id="lightbox-counter"></div>
+</div>
+
+<!-- ══════════════════════ PAGE: HOME ══════════════════════ -->
+<div id="page-home" class="page">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="glow-orb" style="top:-15%;right:-8%;width:55vw;height:55vw;background:radial-gradient(circle,rgba(40,92,112,.28) 0%,transparent 68%)"></div>
+    <div class="glow-orb-alt" style="bottom:-8%;left:-8%;width:40vw;height:40vw;background:radial-gradient(circle,rgba(28,62,78,.22) 0%,transparent 68%)"></div>
+    <div class="glow-orb" style="top:40%;left:30%;width:28vw;height:28vw;background:radial-gradient(circle,rgba(81,115,128,.08) 0%,transparent 65%)"></div>
+    <div class="hero-content">
+      <h1 class="hero-h1" id="hero-heading">GE INTERNATIONAL<br><span>LLC</span></h1>
+      <p class="hero-sub" id="hero-sub">US-Registered. Globally Positioned. <strong>Precision Trade at Scale.</strong></p>
+      <div class="btn-row" id="hero-cta">
+        <button class="btn-primary" onclick="navigate('services')">Explore Divisions</button>
+        <button class="btn-outline" onclick="navigate('contact')">Contact Us</button>
+      </div>
+      <div class="hero-stats" id="hero-stats">
+        <div><div class="stat-val">150+</div><div class="stat-label">Countries Served</div></div>
+        <div><div class="stat-val">$2B+</div><div class="stat-label">Trade Volume</div></div>
+        <div><div class="stat-val">10K+</div><div class="stat-label">Shipments</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divisions Teaser -->
+  <section class="section-light" id="divisions-preview">
+    <div class="glow-orb" style="top:-10%;right:-5%;width:45vw;height:45vw;background:radial-gradient(circle,rgba(40,92,112,.11) 0%,transparent 65%)"></div>
+    <div class="glow-orb-alt" style="bottom:0;left:-8%;width:35vw;height:35vw;background:radial-gradient(circle,rgba(81,115,128,.09) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div style="margin-bottom:3.25rem">
+        <div class="glow-accent-line"></div>
+        <h2 class="section-h2">Core Industrial<br><span class="accent">Divisions</span></h2>
+      </div>
+      <div class="grid-3" id="home-div-cards">
+        <div class="card">
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop" alt="Scrap Materials" loading="lazy"/><div class="card-img-overlay"></div></div>
+          <div class="card-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem">
+              <span class="tag-label">SCRAP &amp; MATERIALS</span>
+              <div class="card-icon"><i data-lucide="recycle" width="14" height="14"></i></div>
+            </div>
+            <div class="card-title">Scrap &amp; Raw Materials</div>
+            <div class="card-desc">Volume procurement of ferrous and non-ferrous metals, industrial scrap, and recyclable commodities globally.</div>
+            <div class="btn-row-sm">
+              <a class="buy-btn" onclick="navigate('contact')">BUY FROM US</a>
+              <a class="sell-btn" onclick="navigate('contact')">SELL TO US</a>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=600&q=80&fit=crop" alt="Heavy Machinery" loading="lazy"/><div class="card-img-overlay"></div></div>
+          <div class="card-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem">
+              <span class="tag-label">HEAVY MACHINERY</span>
+              <div class="card-icon"><i data-lucide="cog" width="14" height="14"></i></div>
+            </div>
+            <div class="card-title">Heavy Machinery</div>
+            <div class="card-desc">End-to-end industrial equipment acquisition with in-house mechanical verification and global logistics staging.</div>
+            <div class="btn-row-sm">
+              <a class="buy-btn" onclick="navigate('contact')">BUY FROM US</a>
+              <a class="sell-btn" onclick="navigate('contact')">SELL TO US</a>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80&fit=crop" alt="Electromedical" loading="lazy"/><div class="card-img-overlay"></div></div>
+          <div class="card-body">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem">
+              <span class="tag-label">ELECTROMEDICAL</span>
+              <div class="card-icon"><i data-lucide="stethoscope" width="14" height="14"></i></div>
+            </div>
+            <div class="card-title">Electromedical Equipment</div>
+            <div class="card-desc">Precision-grade hospital asset recovery with compliance certifications and climate-controlled logistics.</div>
+            <div class="btn-row-sm">
+              <a class="buy-btn" onclick="navigate('contact')">BUY FROM US</a>
+              <a class="sell-btn" onclick="navigate('contact')">SELL TO US</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:2.25rem;text-align:right">
+        <a style="color:#285C70;font-size:.82rem;cursor:pointer;display:inline-flex;align-items:center;gap:5px" onclick="navigate('services')">View all services <i data-lucide="arrow-up-right" width="13" height="13"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Industries We Serve -->
+  <section class="section-dark" id="home-industries">
+    <div class="glow-orb" style="top:-25%;left:20%;width:45vw;height:45vw;background:radial-gradient(circle,rgba(40,92,112,.14) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div style="margin-bottom:3rem;max-width:560px">
+        <div class="glow-accent-line-light"></div>
+        <h2 class="section-h2-light">Industries<br>We <span class="accent">Serve</span></h2>
+        <p class="page-sub" style="margin-top:1rem">From heavy construction to healthcare, our procurement and export network is built around the sectors that keep the world moving.</p>
+      </div>
+      <div class="industry-grid">
+        <div class="industry-chip"><div class="industry-icon"><i data-lucide="hard-hat" width="18" height="18"></i></div><div class="industry-label">Construction</div></div>
+        <div class="industry-chip"><div class="industry-icon"><i data-lucide="heart-pulse" width="18" height="18"></i></div><div class="industry-label">Healthcare</div></div>
+        <div class="industry-chip"><div class="industry-icon"><i data-lucide="factory" width="18" height="18"></i></div><div class="industry-label">Manufacturing</div></div>
+        <div class="industry-chip"><div class="industry-icon"><i data-lucide="zap" width="18" height="18"></i></div><div class="industry-label">Energy</div></div>
+        <div class="industry-chip"><div class="industry-icon"><i data-lucide="flame" width="18" height="18"></i></div><div class="industry-label">Oil &amp; Gas</div></div>
+        <div class="industry-chip"><div class="industry-icon"><i data-lucide="recycle" width="18" height="18"></i></div><div class="industry-label">Recycling</div></div>
+        <div class="industry-chip"><div class="industry-icon"><i data-lucide="building-2" width="18" height="18"></i></div><div class="industry-label">Infrastructure</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why GE International -->
+  <section class="section-light" id="home-why">
+    <div class="glow-orb-alt" style="top:-15%;right:-10%;width:40vw;height:40vw;background:radial-gradient(circle,rgba(40,92,112,.1) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div style="margin-bottom:3rem;max-width:560px">
+        <div class="glow-accent-line"></div>
+        <h2 class="section-h2">Why <span class="accent">GE International</span></h2>
+        <p class="page-sub" style="color:#737575;margin-top:1rem">A trade partner built on process discipline, verified relationships, and logistics infrastructure that holds up at scale.</p>
+      </div>
+      <div class="trust-grid" id="home-why-cards" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <div class="trust-card"><div class="trust-icon"><i data-lucide="link" width="18" height="18"></i></div><div class="trust-title">Reliable Supply Chain</div><div class="trust-desc">Vetted sourcing partners and redundant procurement channels keep orders on schedule.</div></div>
+        <div class="trust-card"><div class="trust-icon"><i data-lucide="tag" width="18" height="18"></i></div><div class="trust-title">Competitive Pricing</div><div class="trust-desc">Direct sourcing relationships remove markup layers common with brokers.</div></div>
+        <div class="trust-card"><div class="trust-icon"><i data-lucide="shield-check" width="18" height="18"></i></div><div class="trust-title">International Compliance</div><div class="trust-desc">Documentation and customs handling aligned with destination-country requirements.</div></div>
+        <div class="trust-card"><div class="trust-icon"><i data-lucide="globe" width="18" height="18"></i></div><div class="trust-title">Global Logistics</div><div class="trust-desc">Freight, inspection, and delivery coordinated through a single point of contact.</div></div>
+        <div class="trust-card"><div class="trust-icon"><i data-lucide="headset" width="18" height="18"></i></div><div class="trust-title">Dedicated Support</div><div class="trust-desc">A named account contact from inquiry through final delivery confirmation.</div></div>
+        <div class="trust-card"><div class="trust-icon"><i data-lucide="badge-check" width="18" height="18"></i></div><div class="trust-title">Verified Partners</div><div class="trust-desc">Every supplier and buyer relationship is vetted before onboarding.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Exports Teaser -->
+  <section class="section-teal" id="home-exports">
+    <div class="glow-orb" style="bottom:-20%;right:-15%;width:55vw;height:55vw;background:radial-gradient(circle,rgba(40,92,112,.4) 0%,transparent 65%)"></div>
+    <div class="glow-orb-alt" style="top:20%;left:-10%;width:30vw;height:30vw;background:radial-gradient(circle,rgba(81,115,128,.18) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <div class="glow-accent-line-light"></div>
+          <h2 class="section-h2-light">Seamless US-to-Global<br><span class="accent">Export Solutions</span></h2>
+          <p style="color:#8AAAB8;font-size:.9rem;line-height:1.7;margin:1.25rem 0 2rem;max-width:400px">Our logistics infrastructure covers every critical touchpoint — from US procurement through international delivery. One partner, every destination.</p>
+          <a class="btn-ghost-light" onclick="navigate('exports')">Explore Logistics <i data-lucide="arrow-up-right" width="14" height="14"></i></a>
+        </div>
+        <div style="border-radius:16px;overflow:hidden;height:320px;position:relative;box-shadow:0 0 60px rgba(40,92,112,.35),0 20px 40px rgba(0,0,0,.3)">
+          <img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c1?w=800&q=80&fit=crop" alt="Shipping logistics" style="width:100%;height:100%;object-fit:cover" loading="lazy"/>
+          <div style="position:absolute;inset:0;background:rgba(28,62,78,.25)"></div>
+          <div style="position:absolute;bottom:20px;left:20px;display:flex;gap:8px;flex-wrap:wrap">
+            <span style="padding:4px 10px;border-radius:9999px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#F2EDEA;font-size:.65rem">Freight Forwarding</span>
+            <span style="padding:4px 10px;border-radius:9999px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#F2EDEA;font-size:.65rem">Customs Clearance</span>
+            <span style="padding:4px 10px;border-radius:9999px;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);color:#F2EDEA;font-size:.65rem">End-to-End</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Process -->
+  <section class="section-dark" id="home-process">
+    <div class="container">
+      <div style="margin-bottom:2.5rem;max-width:560px">
+        <div class="glow-accent-line-light"></div>
+        <h2 class="section-h2-light">Our <span class="accent">Process</span></h2>
+        <p class="page-sub" style="margin-top:1rem">A structured path from first inquiry to cleared delivery, with visibility at every stage.</p>
+      </div>
+      <div>
+        <div class="process-step"><div class="step-num">01</div><div><div class="step-title">Inquiry</div><div class="step-desc">You submit product, spec, and volume requirements through our team or contact form.</div></div></div>
+        <div class="process-step"><div class="step-num">02</div><div><div class="step-title">Quotation</div><div class="step-desc">We return pricing, lead time, and logistics options based on verified supply.</div></div></div>
+        <div class="process-step"><div class="step-num">03</div><div><div class="step-title">Procurement</div><div class="step-desc">Orders are placed and tracked through our vetted supplier network.</div></div></div>
+        <div class="process-step"><div class="step-num">04</div><div><div class="step-title">Quality Inspection</div><div class="step-desc">Goods are inspected and certified against agreed specifications prior to release.</div></div></div>
+        <div class="process-step"><div class="step-num">05</div><div><div class="step-title">Global Shipping</div><div class="step-desc">Freight, customs documentation, and delivery are coordinated end to end.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Reach -->
+  <section class="section-teal" id="home-reach">
+    <div class="glow-orb" style="top:-20%;right:-10%;width:45vw;height:45vw;background:radial-gradient(circle,rgba(40,92,112,.35) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div class="grid-2">
+        <div>
+          <div class="glow-accent-line-light"></div>
+          <h2 class="section-h2-light">Global <span class="accent">Reach</span></h2>
+          <p style="color:#8AAAB8;font-size:.9rem;line-height:1.7;margin:1.25rem 0 0;max-width:420px">Established shipping routes and customs relationships across five continents support consistent, predictable delivery.</p>
+          <div class="reach-stats-row">
+            <div class="stat-box" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)"><div class="stat-box-val" style="color:#8AAAB8" data-counter="150" data-suffix="+">0</div><div class="stat-box-label" style="color:#A1A1A1">Countries</div></div>
+            <div class="stat-box" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)"><div class="stat-box-val" style="color:#8AAAB8" data-counter="10000" data-suffix="+">0</div><div class="stat-box-label" style="color:#A1A1A1">Shipments</div></div>
+            <div class="stat-box" style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1)"><div class="stat-box-val" style="color:#8AAAB8" data-counter="40" data-suffix="+">0</div><div class="stat-box-label" style="color:#A1A1A1">Ports of Call</div></div>
+          </div>
+        </div>
+        <div class="reach-visual">
+          <div class="reach-region"><span class="reach-region-name">North America</span><span class="reach-region-val">Origin Hub</span></div>
+          <div class="reach-region"><span class="reach-region-name">Europe</span><span class="reach-region-val">45+ Countries</span></div>
+          <div class="reach-region"><span class="reach-region-name">Middle East</span><span class="reach-region-val">18+ Countries</span></div>
+          <div class="reach-region"><span class="reach-region-name">Asia-Pacific</span><span class="reach-region-val">38+ Countries</span></div>
+          <div class="reach-region"><span class="reach-region-name">Africa</span><span class="reach-region-val">27+ Countries</span></div>
+          <div class="reach-region" style="margin-bottom:0"><span class="reach-region-name">Latin America</span><span class="reach-region-val">22+ Countries</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ventures Teaser -->
+  <section class="section-light" id="home-ventures">
+    <div class="glow-orb-alt" style="top:-20%;left:50%;width:40vw;height:40vw;background:radial-gradient(circle,rgba(40,92,112,.1) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:2.5rem;margin-bottom:2.75rem">
+        <div>
+          <div class="glow-accent-line"></div>
+          <h2 class="section-h2">Diversified<br><span class="accent">Ventures</span></h2>
+        </div>
+        <p style="color:#737575;font-size:.85rem;line-height:1.7;max-width:320px;padding-top:.5rem">GE International's expanding local service ecosystem — planned rollout across key US metropolitan markets.</p>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <span style="padding:10px 18px;border-radius:9999px;background:#EDEBE8;border:1px solid rgba(40,92,112,.14);color:#3F5A66;font-size:.82rem">Home Cleaning</span>
+        <span style="padding:10px 18px;border-radius:9999px;background:#EDEBE8;border:1px solid rgba(40,92,112,.14);color:#3F5A66;font-size:.82rem">Gardening</span>
+        <span style="padding:10px 18px;border-radius:9999px;background:#EDEBE8;border:1px solid rgba(40,92,112,.14);color:#3F5A66;font-size:.82rem">Roofing</span>
+        <span style="padding:10px 18px;border-radius:9999px;background:#EDEBE8;border:1px solid rgba(40,92,112,.14);color:#3F5A66;font-size:.82rem">Handyman Services</span>
+        <span style="padding:10px 18px;border-radius:9999px;background:#EDEBE8;border:1px solid rgba(40,92,112,.14);color:#3F5A66;font-size:.82rem">Property Maintenance</span>
+        <a class="buy-btn" style="padding:10px 18px;display:inline-flex;align-items:center;gap:5px;font-size:.82rem;letter-spacing:0;text-transform:none" onclick="navigate('ventures')">View all <i data-lucide="arrow-up-right" width="12" height="12"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section-dark" id="home-testimonials">
+    <div class="container">
+      <div style="margin-bottom:2.75rem;max-width:560px">
+        <div class="glow-accent-line-light"></div>
+        <h2 class="section-h2-light">What Clients <span class="accent">Say</span></h2>
+      </div>
+      <div class="grid-3">
+        <div class="testimonial-card">
+          <div class="testimonial-quote-icon"><i data-lucide="quote" width="20" height="20"></i></div>
+          <div class="testimonial-text">GE International sourced and shipped a full order of industrial equipment on a tighter timeline than any supplier we'd worked with before. Documentation was clean and the shipment cleared customs without delay.</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MK</div>
+            <div><div class="testimonial-name">M. Kessler</div><div class="testimonial-role">Procurement Director, Industrial Manufacturer</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote-icon"><i data-lucide="quote" width="20" height="20"></i></div>
+          <div class="testimonial-text">We've moved several scrap and materials contracts through GE International. Pricing stayed competitive and their team flagged quality issues before goods ever left the origin port.</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">RA</div>
+            <div><div class="testimonial-name">R. Abara</div><div class="testimonial-role">Operations Lead, Metals Recycler</div></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-quote-icon"><i data-lucide="quote" width="20" height="20"></i></div>
+          <div class="testimonial-text">Medical equipment sourcing has strict compliance requirements. GE International handled certification and cold-chain logistics without us having to manage multiple vendors.</div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SL</div>
+            <div><div class="testimonial-name">S. Larsen</div><div class="testimonial-role">Supply Chain Manager, Healthcare Group</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="section-deepblue" id="home-cta">
+    <div class="glow-orb" style="top:-30%;left:20%;width:50vw;height:50vw;background:radial-gradient(circle,rgba(242,237,234,.08) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div class="cta-banner-inner">
+        <div class="glow-accent-line-light" style="margin-left:auto;margin-right:auto"></div>
+        <h2 class="cta-banner-h2">Ready to move<br>your next shipment?</h2>
+        <p class="cta-banner-p">Tell us what you need to buy, sell, or export — we'll respond with pricing and a timeline within one business day.</p>
+        <div class="btn-row">
+          <button class="btn-primary" onclick="navigate('contact')">Request a Quote</button>
+          <button class="btn-outline" onclick="navigate('services')">Explore Services</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════ PAGE: SERVICES ══════════════════════ -->
+<div id="page-services" class="page">
+  <section class="dark-header">
+    <div class="glow-orb" style="top:-10%;right:-5%;width:40vw;height:40vw;background:radial-gradient(circle,rgba(40,92,112,.28) 0%,transparent 68%)"></div>
+    <div class="glow-orb-alt" style="bottom:-20%;left:10%;width:30vw;height:30vw;background:radial-gradient(circle,rgba(81,115,128,.14) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div class="glow-accent-line-light"></div>
+      <h1 class="page-h1">Core Industrial<br><span class="accent">Divisions</span></h1>
+      <p class="page-sub">Three specialised divisions driving global procurement and supply operations from our US base.</p>
+    </div>
+  </section>
+
+  <section class="section-light">
+    <div class="glow-orb" style="top:10%;right:-8%;width:50vw;height:50vw;background:radial-gradient(circle,rgba(40,92,112,.1) 0%,transparent 65%)"></div>
+    <div class="glow-orb-alt" style="bottom:5%;left:-6%;width:38vw;height:38vw;background:radial-gradient(circle,rgba(81,115,128,.09) 0%,transparent 65%)"></div>
+    <div class="container" id="svc-cards">
+      <!-- Scrap -->
+      <div class="svc-card">
+        <div class="svc-gallery">
+          <div class="svc-gallery-tag"><div class="svc-gallery-tag-icon"><i data-lucide="recycle" width="16" height="16"></i></div><span class="svc-gallery-tag-text">SCRAP &amp; MATERIALS</span></div>
+          <div class="svc-gallery-item" onclick="openLightbox('scrap',0)"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&fit=crop" alt="Scrap Metal" loading="lazy"/><div class="svc-gallery-item-overlay"><div class="svc-gallery-expand-icon"><i data-lucide="expand" width="13" height="13"></i></div></div></div>
+          <div class="svc-gallery-item" onclick="openLightbox('scrap',1)"><img src="https://images.unsplash.com/photo-1671362935207-d9abfc5b9509?w=700&q=80&fit=crop" alt="Metal Scrap Pile" loading="lazy"/><div class="svc-gallery-item-overlay"><div class="svc-gallery-expand-icon"><i data-lucide="expand" width="13" height="13"></i></div></div></div>
+          <div class="svc-gallery-item" onclick="openLightbox('scrap',2)"><img src="https://images.unsplash.com/photo-1761665698795-ac9df3438b74?w=700&q=80&fit=crop" alt="Rusty Metal Debris" loading="lazy"/><div class="svc-gallery-item-overlay"><div class="svc-gallery-expand-icon"><i data-lucide="expand" width="13" height="13"></i></div></div></div>
+          <div class="svc-gallery-item" onclick="openLightbox('scrap',3)"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=700&q=80&fit=crop" alt="Shipping Containers" loading="lazy"/><div class="svc-gallery-item-overlay"><div class="svc-gallery-expand-icon"><i data-lucide="expand" width="13" height="13"></i></div></div></div>
+        </div>
+        <div class="svc-body">
+          <div>
+            <h2 class="svc-h2">Scrap &amp; Raw Materials</h2>
+            <p class="svc-desc">Volume procurement of ferrous and non-ferrous metals, industrial scrap, and recyclable commodities. We buy directly from facilities across the US or source globally for your specific material requirements.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="buy-btn-lg" onclick="navigate('contact')">Buy From Us</a>
+              <a class="sell-btn-lg" onclick="navigate('contact')">Sell To Us</a>
+            </div>
+          </div>
+          <div>
+            <div class="cap-label">Capabilities</div>
+            <div class="cap-list">
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Ferrous &amp; Non-Ferrous Metals</span></div>
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Industrial Scrap</span></div>
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Commodity Pricing Indices</span></div>
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Volume Procurement</span></div>
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Global Supply Chain</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Machinery -->
+      <div class="svc-card">
+        <div class="svc-gallery">
+          <div class="svc-gallery-tag"><div class="svc-gallery-tag-icon"><i data-lucide="cog" width="16" height="16"></i></div><span class="svc-gallery-tag-text">HEAVY MACHINERY</span></div>
+          <div class="svc-gallery-item" onclick="openLightbox('machinery',0)"><img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=700&q=80&fit=crop" alt="Heavy Machinery" loading="lazy"/><div class="svc-gallery-item-overlay"><div class="svc-gallery-expand-icon"><i data-lucide="expand" width="13" height="13"></i></div></div></div>
+          <div class="svc-gallery-item" onclick="openLightbox('machinery',1)"><img src="https://images.unsplash.com/photo-1780389098001-e641e50aeebd?w=700&q=80&fit=crop" alt="Construction Equipment" loading="lazy"/><div class="svc-gallery-item-overlay"><div class="svc-gallery-expand-icon"><i data-lucide="expand" width="13" height="13"></i></div></div></div>
+          <div class="svc-gallery-item" onclick="openLightbox('machinery',2)"><img src="https://images.unsplash.com/photo-1689596312049-0a21da693515?w=700&q=80&fit=crop" alt="Aerial Construction Site" loading="lazy"/><div class="svc-gallery-item-overlay"><div class="svc-gallery-expand-icon"><i data-lucide="expand" width="13" height="13"></i></div></div></div>
+          <div class="svc-gallery-item" onclick="openLightbox('machinery',3)"><img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c1?w=700&q=80&fit=crop" alt="Equipment Shipping" loading="lazy"/><div class="svc-gallery-item-overlay"><div class="svc-gallery-expand-icon"><i data-lucide="expand" width="13" height="13"></i></div></div></div>
+        </div>
+        <div class="svc-body">
+          <div>
+            <h2 class="svc-h2">Heavy Machinery</h2>
+            <p class="svc-desc">End-to-end industrial equipment acquisition with in-house mechanical verification. From procurement through international logistics staging, we manage the entire supply chain with accountability at every step.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="buy-btn-lg" onclick="navigate('contact')">Buy From Us</a>
+              <a class="sell-btn-lg" onclick="navigate('contact')">Sell To Us</a>
+            </div>
+          </div>
+          <div>
+            <div class="cap-label">Capabilities</div>
+            <div class="cap-list">
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Industrial Equipment Sourcing</span></div>
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Mechanical Verification</span></div>
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Logistics Staging</span></div>
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Condition Assessment</span></div>
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Global Delivery</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Medical -->
+      <div class="svc-card">
+        <div class="svc-gallery">
+          <div class="svc-gallery-tag"><div class="svc-gallery-tag-icon"><i data-lucide="stethoscope" width="16" height="16"></i></div><span class="svc-gallery-tag-text">ELECTROMEDICAL</span></div>
+          <div class="svc-gallery-item" onclick="openLightbox('medical',0)"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=700&q=80&fit=crop" alt="Electromedical Equipment" loading="lazy"/><div class="svc-gallery-item-overlay"><div class="svc-gallery-expand-icon"><i data-lucide="expand" width="13" height="13"></i></div></div></div>
+          <div class="svc-gallery-item" onclick="openLightbox('medical',1)"><img src="https://images.unsplash.com/photo-1723513198534-c3cd2e033815?w=700&q=80&fit=crop" alt="Hospital Monitors" loading="lazy"/><div class="svc-gallery-item-overlay"><div class="svc-gallery-expand-icon"><i data-lucide="expand" width="13" height="13"></i></div></div></div>
+          <div class="svc-gallery-item" onclick="openLightbox('medical',2)"><img src="https://images.unsplash.com/photo-1643264560215-9c2f72485ca1?w=700&q=80&fit=crop" alt="Wall-Mounted Medical Equipment" loading="lazy"/><div class="svc-gallery-item-overlay"><div class="svc-gallery-expand-icon"><i data-lucide="expand" width="13" height="13"></i></div></div></div>
+          <div class="svc-gallery-item" onclick="openLightbox('medical',3)"><img src="https://images.unsplash.com/photo-1746842421936-461e16dd8238?w=700&q=80&fit=crop" alt="Medical Tools" loading="lazy"/><div class="svc-gallery-item-overlay"><div class="svc-gallery-expand-icon"><i data-lucide="expand" width="13" height="13"></i></div></div></div>
+        </div>
+        <div class="svc-body">
+          <div>
+            <h2 class="svc-h2">Electromedical Equipment</h2>
+            <p class="svc-desc">Precision-grade hospital asset recovery and redistribution. Compliance certifications, calibration documentation, and climate-controlled logistics for medical-grade devices requiring the highest standards of care.</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="buy-btn-lg" onclick="navigate('contact')">Buy From Us</a>
+              <a class="sell-btn-lg" onclick="navigate('contact')">Sell To Us</a>
+            </div>
+          </div>
+          <div>
+            <div class="cap-label">Capabilities</div>
+            <div class="cap-list">
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Hospital Asset Recovery</span></div>
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Compliance Certifications</span></div>
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Calibration Documentation</span></div>
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Climate-Controlled Logistics</span></div>
+              <div class="cap-item"><div class="cap-dot"><i data-lucide="check" width="11" height="11"></i></div><span class="cap-text">Precision Handling</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════ PAGE: EXPORTS ══════════════════════ -->
+<div id="page-exports" class="page">
+  <section class="teal-header" style="background:#1C3E4E">
+    <div style="position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1600&q=60&fit=crop') center/cover;opacity:.12"></div>
+    <div class="glow-orb" style="bottom:-20%;right:-10%;width:50vw;height:50vw;background:radial-gradient(circle,rgba(81,115,128,.22) 0%,transparent 65%)"></div>
+    <div class="container" style="position:relative;z-index:1">
+      <div class="glow-accent-line-light"></div>
+      <h1 class="page-h1">Seamless US-to-Global<br><span class="accent">Export Solutions</span></h1>
+      <p class="page-sub">Our logistics infrastructure covers every critical touchpoint — from US procurement through international delivery. One partner. Every destination.</p>
+      <div style="margin-top:3rem;display:flex;gap:clamp(2rem,5vw,4rem);flex-wrap:wrap">
+        <div><div class="stat-val" style="font-size:clamp(2rem,5vw,3rem)" data-counter="150" data-suffix="+">0</div><div class="stat-label">Countries</div></div>
+        <div><div class="stat-val" style="font-size:clamp(2rem,5vw,3rem)" data-counter="10000" data-suffix="+">0</div><div class="stat-label">Shipments</div></div>
+        <div><div class="stat-val" style="font-size:clamp(2rem,5vw,3rem)">$2B+</div><div class="stat-label">Trade Volume</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee-band"><div class="marquee-inner"><span class="marquee-text">NEW YORK  ·  DUBAI  ·  SINGAPORE  ·  LONDON  ·  SHANGHAI  ·  TOKYO  ·  FRANKFURT  ·  HONG KONG  ·  SYDNEY  ·  TORONTO  ·  MUMBAI  ·  JOHANNESBURG  ·  SAO PAULO  ·  SEOUL  ·  NEW YORK  ·  DUBAI  ·  SINGAPORE  ·  LONDON  ·  SHANGHAI  ·  TOKYO  ·  FRANKFURT  ·  HONG KONG  ·  SYDNEY  ·  TORONTO  ·  MUMBAI  ·  JOHANNESBURG  ·  SAO PAULO  ·  SEOUL  ·  </span></div></div>
+
+  <section class="section-light">
+    <div class="glow-orb" style="top:5%;right:-5%;width:45vw;height:45vw;background:radial-gradient(circle,rgba(40,92,112,.1) 0%,transparent 65%)"></div>
+    <div class="container">
+      <h2 class="section-h2" style="margin-bottom:2.5rem">Our Logistics <span class="accent">Network</span></h2>
+      <div class="gallery-grid" id="export-gallery">
+        <div class="gallery-item gallery-span"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&fit=crop" alt="Port"/><div class="gallery-label">Port Operations</div></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c1?w=600&q=80&fit=crop" alt="Ship"/><div class="gallery-label">Ocean Freight</div></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80&fit=crop" alt="Containers"/><div class="gallery-label">Containers</div></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1609726026982-82e7b1a3ea8b?w=600&q=80&fit=crop" alt="Air Freight"/><div class="gallery-label">Air Freight</div></div>
+        <div class="gallery-item"><img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=600&q=80&fit=crop" alt="Customs"/><div class="gallery-label">Customs</div></div>
+      </div>
+      <div class="grid-3" id="export-caps">
+        <div class="trust-card card"><div class="trust-icon"><i data-lucide="ship" width="18" height="18"></i></div><div class="trust-title">Freight Forwarding</div><div class="trust-desc">Sea, air, and multimodal freight management across all major global trade lanes.</div></div>
+        <div class="trust-card card"><div class="trust-icon"><i data-lucide="file-check" width="18" height="18"></i></div><div class="trust-title">Customs Clearance</div><div class="trust-desc">Expert navigation of US export regulations and international customs protocols.</div></div>
+        <div class="trust-card card"><div class="trust-icon"><i data-lucide="globe" width="18" height="18"></i></div><div class="trust-title">International Compliance</div><div class="trust-desc">Full adherence to EAR, ITAR, and destination-country import regulations.</div></div>
+        <div class="trust-card card"><div class="trust-icon"><i data-lucide="package" width="18" height="18"></i></div><div class="trust-title">End-to-End Logistics</div><div class="trust-desc">From warehouse pickup to last-mile delivery — one point of accountability.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-dark" id="export-process">
+    <div class="container">
+      <h2 class="section-h2-light" style="margin-bottom:3.25rem">How It <span class="accent">Works</span></h2>
+      <div>
+        <div class="process-step"><span class="step-num">01</span><div><div class="step-title">Enquiry &amp; Requirements</div><div class="step-desc">Submit your requirements via our contact form with relevant specifications and destination details.</div></div><i data-lucide="arrow-right" width="16" height="16" class="step-arrow"></i></div>
+        <div class="process-step"><span class="step-num">02</span><div><div class="step-title">Assessment &amp; Quotation</div><div class="step-desc">Our team evaluates feasibility, compliance requirements, and provides a comprehensive quotation.</div></div><i data-lucide="arrow-right" width="16" height="16" class="step-arrow"></i></div>
+        <div class="process-step"><span class="step-num">03</span><div><div class="step-title">Procurement &amp; Preparation</div><div class="step-desc">We source, verify, document, and prepare your goods for international export from US facilities.</div></div><i data-lucide="arrow-right" width="16" height="16" class="step-arrow"></i></div>
+        <div class="process-step"><span class="step-num">04</span><div><div class="step-title">Customs &amp; Compliance</div><div class="step-desc">Full compliance handling including EAR/ITAR checks, export licences, and customs documentation.</div></div><i data-lucide="arrow-right" width="16" height="16" class="step-arrow"></i></div>
+        <div class="process-step"><span class="step-num">05</span><div><div class="step-title">Freight &amp; Delivery</div><div class="step-desc">Multimodal freight coordination from US origin to final destination, tracked end-to-end.</div></div><i data-lucide="arrow-right" width="16" height="16" class="step-arrow"></i></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════ PAGE: VENTURES ══════════════════════ -->
+<div id="page-ventures" class="page">
+  <section class="section-deepblue">
+    <div class="glow-orb" style="top:-10%;left:-5%;width:35vw;height:35vw;background:radial-gradient(circle,rgba(81,115,128,.3) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div class="glow-accent-line-light"></div>
+      <h1 class="page-h1">Beyond Trade —<br>Diversified Ventures</h1>
+      <p class="page-sub">GE International's expanding local service ecosystem — planned rollout across key US metropolitan markets, bringing the same institutional discipline to local service delivery.</p>
+    </div>
+  </section>
+
+  <section class="section-light">
+    <div class="glow-orb" style="top:5%;right:-5%;width:40vw;height:40vw;background:radial-gradient(circle,rgba(40,92,112,.1) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div class="grid-3" id="venture-cards">
+        <div class="venture-card">
+          <div class="venture-img"><img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&q=80&fit=crop" alt="Home Cleaning" loading="lazy"/><div class="venture-img-overlay"></div></div>
+          <div class="venture-body">
+            <div class="venture-head"><div class="venture-icon"><i data-lucide="home" width="18" height="18"></i></div><span class="status-pill">Coming Soon</span></div>
+            <div class="venture-title">Home Cleaning</div>
+            <div class="venture-mission">Mission: bring institutional-grade reliability to a fragmented local service market.</div>
+            <div class="venture-svc-list">
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Residential &amp; commercial cleaning</div>
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Recurring maintenance plans</div>
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Move-in / move-out service</div>
+            </div>
+            <div class="venture-benefits"><span class="venture-benefit-tag">VETTED TEAMS</span><span class="venture-benefit-tag">FLEXIBLE SCHEDULING</span></div>
+          </div>
+        </div>
+        <div class="venture-card">
+          <div class="venture-img"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80&fit=crop" alt="Gardening" loading="lazy"/><div class="venture-img-overlay"></div></div>
+          <div class="venture-body">
+            <div class="venture-head"><div class="venture-icon"><i data-lucide="leaf" width="18" height="18"></i></div><span class="status-pill">Coming Soon</span></div>
+            <div class="venture-title">Gardening</div>
+            <div class="venture-mission">Mission: deliver consistent, seasonally-aware landscape care backed by real accountability.</div>
+            <div class="venture-svc-list">
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Landscape design &amp; installation</div>
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Lawn maintenance programs</div>
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Seasonal planting &amp; garden care</div>
+            </div>
+            <div class="venture-benefits"><span class="venture-benefit-tag">SEASONAL PLANS</span><span class="venture-benefit-tag">LICENSED CREWS</span></div>
+          </div>
+        </div>
+        <div class="venture-card">
+          <div class="venture-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80&fit=crop" alt="Roofing" loading="lazy"/><div class="venture-img-overlay"></div></div>
+          <div class="venture-body">
+            <div class="venture-head"><div class="venture-icon"><i data-lucide="hard-hat" width="18" height="18"></i></div><span class="status-pill">Coming Soon</span></div>
+            <div class="venture-title">Roofing</div>
+            <div class="venture-mission">Mission: apply our procurement discipline to materials sourcing and job-site quality control.</div>
+            <div class="venture-svc-list">
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Installation &amp; full replacement</div>
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Repair &amp; storm-damage response</div>
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Inspection &amp; maintenance contracts</div>
+            </div>
+            <div class="venture-benefits"><span class="venture-benefit-tag">INSURED CREWS</span><span class="venture-benefit-tag">MATERIAL WARRANTY</span></div>
+          </div>
+        </div>
+        <div class="venture-card">
+          <div class="venture-img"><img src="https://images.unsplash.com/photo-1581244277943-fe4a9c777189?w=600&q=80&fit=crop" alt="Handyman" loading="lazy"/><div class="venture-img-overlay"></div></div>
+          <div class="venture-body">
+            <div class="venture-head"><div class="venture-icon"><i data-lucide="wrench" width="18" height="18"></i></div><span class="status-pill">Coming Soon</span></div>
+            <div class="venture-title">Handyman Services</div>
+            <div class="venture-mission">Mission: give homeowners a single trusted call for the repairs that don't warrant a specialist.</div>
+            <div class="venture-svc-list">
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>General repairs &amp; fixture installs</div>
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Minor carpentry &amp; assembly</div>
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Home improvement tasks</div>
+            </div>
+            <div class="venture-benefits"><span class="venture-benefit-tag">SAME-WEEK BOOKING</span><span class="venture-benefit-tag">SKILLED TRADES</span></div>
+          </div>
+        </div>
+        <div class="venture-card">
+          <div class="venture-img"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&q=80&fit=crop" alt="Property" loading="lazy"/><div class="venture-img-overlay"></div></div>
+          <div class="venture-body">
+            <div class="venture-head"><div class="venture-icon"><i data-lucide="building-2" width="18" height="18"></i></div><span class="status-pill">Coming Soon</span></div>
+            <div class="venture-title">Property Maintenance</div>
+            <div class="venture-mission">Mission: consolidate multi-discipline upkeep under one accountable management contract.</div>
+            <div class="venture-svc-list">
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Ongoing multi-service upkeep</div>
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Vendor coordination &amp; reporting</div>
+              <div class="venture-svc-item"><span class="venture-svc-dot"></span>Preventive maintenance scheduling</div>
+            </div>
+            <div class="venture-benefits"><span class="venture-benefit-tag">SINGLE CONTRACT</span><span class="venture-benefit-tag">MONTHLY REPORTING</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Target Clients & Future Expansion -->
+  <section class="section-dark">
+    <div class="container">
+      <div class="grid-2" style="align-items:start">
+        <div>
+          <div class="glow-accent-line-light"></div>
+          <h2 class="section-h2-light">Target <span class="accent">Clients</span></h2>
+          <p class="page-sub" style="margin:1rem 0 1.75rem">Ventures are being built around client types we already serve on the trade side, extending the same relationship into local markets.</p>
+          <div class="target-list">
+            <div class="target-item"><div class="target-icon"><i data-lucide="home" width="16" height="16"></i></div><div class="target-text">Homeowners &amp; residential properties</div></div>
+            <div class="target-item"><div class="target-icon"><i data-lucide="key" width="16" height="16"></i></div><div class="target-text">Property managers &amp; landlords</div></div>
+            <div class="target-item"><div class="target-icon"><i data-lucide="building" width="16" height="16"></i></div><div class="target-text">Real estate firms &amp; developers</div></div>
+            <div class="target-item"><div class="target-icon"><i data-lucide="landmark" width="16" height="16"></i></div><div class="target-text">Municipal &amp; facilities contracts</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="glow-accent-line-light"></div>
+          <h2 class="section-h2-light">Future <span class="accent">Expansion</span></h2>
+          <p class="page-sub" style="margin:1rem 0 .5rem">A phased rollout designed to prove the model before scaling.</p>
+          <div>
+            <div class="roadmap-phase"><div class="roadmap-phase-num">1</div><div><div class="roadmap-phase-title">Initial Metro Launch</div><div class="roadmap-phase-desc">Home Cleaning and Handyman Services launch in a single US metropolitan market.</div></div></div>
+            <div class="roadmap-phase"><div class="roadmap-phase-num">2</div><div><div class="roadmap-phase-title">Service Line Expansion</div><div class="roadmap-phase-desc">Gardening, Roofing, and Property Maintenance added within the launch market.</div></div></div>
+            <div class="roadmap-phase"><div class="roadmap-phase-num">3</div><div><div class="roadmap-phase-title">Regional Rollout</div><div class="roadmap-phase-desc">Expansion into adjacent metro areas with a shared operations backbone.</div></div></div>
+            <div class="roadmap-phase"><div class="roadmap-phase-num">4</div><div><div class="roadmap-phase-title">National Footprint</div><div class="roadmap-phase-desc">Multi-market presence leveraging GE International's existing logistics infrastructure.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-light">
+    <div class="container">
+      <div class="dark-banner-grid">
+        <div><h2 class="section-h2">Expanding into Local Services</h2><p style="color:#737575;font-size:.875rem;line-height:1.7">The same institutional discipline, accountability, and quality standards that define our global trade operations — applied to local service delivery across US markets.</p></div>
+        <div class="grid-4-sm">
+          <div class="mini-card" style="background:#EDEBE8;border-color:rgba(40,92,112,.14);color:#3F5A66">Professional Teams</div>
+          <div class="mini-card" style="background:#EDEBE8;border-color:rgba(40,92,112,.14);color:#3F5A66">Vetted &amp; Insured</div>
+          <div class="mini-card" style="background:#EDEBE8;border-color:rgba(40,92,112,.14);color:#3F5A66">Satisfaction Guarantee</div>
+          <div class="mini-card" style="background:#EDEBE8;border-color:rgba(40,92,112,.14);color:#3F5A66">Flexible Scheduling</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════ PAGE: ABOUT ══════════════════════ -->
+<div id="page-about" class="page">
+  <section class="teal-header" style="background:#1C3E4E">
+    <div class="glow-orb" style="bottom:-30%;right:-10%;width:45vw;height:45vw;background:radial-gradient(circle,rgba(81,115,128,.2) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div class="glow-accent-line-light"></div>
+      <h1 class="page-h1">Institutional Trust.<br><span class="accent">Proven Structure.</span></h1>
+      <p class="page-sub">GE International LLC is formally registered as a Limited Liability Company under United States federal and state law.</p>
+    </div>
+  </section>
+
+  <section class="section-light">
+    <div class="glow-orb" style="top:-5%;right:-5%;width:40vw;height:40vw;background:radial-gradient(circle,rgba(40,92,112,.1) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-body">
+          <p>GE International LLC provides institutional credibility and legal certainty to every transaction, operating as a full-standing US entity across international trade, procurement, and logistics.</p>
+          <p>Our structure is designed for global operations: multi-division architecture with clear operational boundaries, financial transparency, and full compliance with US export control regulations including EAR and international trade frameworks.</p>
+          <p>We operate at the intersection of procurement, logistics, and global commerce — providing clients and partners with a single, accountable counterparty regardless of transaction complexity or geographic scope.</p>
+          <div class="cred-strip">
+            <span class="cred-label">Corporate Registration</span>
+            <div class="cred-title">GE International LLC — United States of America</div>
+            <div class="cred-sub">Registered Entity · US Tax Compliant · Multi-State Operations</div>
+          </div>
+          <div class="stat-strip">
+            <div class="stat-box"><div class="stat-box-val">150+</div><div class="stat-box-label">Countries</div></div>
+            <div class="stat-box"><div class="stat-box-val">$2B+</div><div class="stat-box-label">Trade Volume</div></div>
+            <div class="stat-box"><div class="stat-box-val">10K+</div><div class="stat-box-label">Shipments</div></div>
+          </div>
+        </div>
+        <div class="trust-grid">
+          <div class="trust-card"><div class="trust-icon"><i data-lucide="shield" width="17" height="17"></i></div><div class="trust-title">US LLC Registered</div><div class="trust-desc">Formally incorporated under United States law with full regulatory standing.</div></div>
+          <div class="trust-card"><div class="trust-icon"><i data-lucide="globe" width="17" height="17"></i></div><div class="trust-title">Trade Compliant</div><div class="trust-desc">Aligned with US export controls, EAR, and international trade frameworks.</div></div>
+          <div class="trust-card"><div class="trust-icon"><i data-lucide="building" width="17" height="17"></i></div><div class="trust-title">Multi-Division</div><div class="trust-desc">Distinct business units ensure specialised expertise across every sector.</div></div>
+          <div class="trust-card"><div class="trust-icon"><i data-lucide="network" width="17" height="17"></i></div><div class="trust-title">Global Network</div><div class="trust-desc">Established relationships across 150+ markets for rapid sourcing and delivery.</div></div>
+          <div class="trust-card"><div class="trust-icon"><i data-lucide="badge-check" width="17" height="17"></i></div><div class="trust-title">Quality Assurance</div><div class="trust-desc">Every shipment inspected and certified against agreed specifications.</div></div>
+          <div class="trust-card"><div class="trust-icon"><i data-lucide="scale" width="17" height="17"></i></div><div class="trust-title">Ethical Sourcing</div><div class="trust-desc">Supplier relationships vetted for labor, safety, and environmental standards.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="section-teal">
+    <div class="glow-orb" style="top:-25%;right:-10%;width:45vw;height:45vw;background:radial-gradient(circle,rgba(40,92,112,.35) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div class="mv-grid">
+        <div class="mv-card">
+          <div class="mv-icon"><i data-lucide="target" width="20" height="20"></i></div>
+          <div class="mv-title">Our Mission</div>
+          <div class="mv-text">To give buyers and sellers of industrial materials, machinery, and medical equipment a single, accountable partner for procurement, quality assurance, and global delivery — regardless of transaction size or destination.</div>
+        </div>
+        <div class="mv-card">
+          <div class="mv-icon"><i data-lucide="telescope" width="20" height="20"></i></div>
+          <div class="mv-title">Our Vision</div>
+          <div class="mv-text">To be the trade partner clients default to for cross-border procurement — known for institutional discipline, verified relationships, and logistics that hold up under pressure, in every market we serve.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values -->
+  <section class="section-light">
+    <div class="container">
+      <div style="margin-bottom:2.5rem;max-width:560px">
+        <div class="glow-accent-line"></div>
+        <h2 class="section-h2">Core <span class="accent">Values</span></h2>
+      </div>
+      <div class="grid-3">
+        <div class="value-card"><div class="value-icon"><i data-lucide="scale" width="18" height="18"></i></div><div class="value-title">Integrity</div><div class="value-desc">We represent transactions accurately, to both counterparties, every time.</div></div>
+        <div class="value-card"><div class="value-icon"><i data-lucide="clipboard-check" width="18" height="18"></i></div><div class="value-title">Accountability</div><div class="value-desc">One point of contact owns each transaction from inquiry to delivery.</div></div>
+        <div class="value-card"><div class="value-icon"><i data-lucide="crosshair" width="18" height="18"></i></div><div class="value-title">Precision</div><div class="value-desc">Specifications, documentation, and timelines are treated as commitments.</div></div>
+        <div class="value-card"><div class="value-icon"><i data-lucide="handshake" width="18" height="18"></i></div><div class="value-title">Partnership</div><div class="value-desc">Supplier and client relationships are built for repeat business, not one-off deals.</div></div>
+        <div class="value-card"><div class="value-icon"><i data-lucide="eye" width="18" height="18"></i></div><div class="value-title">Transparency</div><div class="value-desc">Clear pricing, honest lead times, and no surprise terms mid-transaction.</div></div>
+        <div class="value-card"><div class="value-icon"><i data-lucide="trending-up" width="18" height="18"></i></div><div class="value-title">Excellence</div><div class="value-desc">Every shipment is expected to meet the same standard, not just the important ones.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="section-dark">
+    <div class="container">
+      <div style="margin-bottom:2.75rem;max-width:560px">
+        <div class="glow-accent-line-light"></div>
+        <h2 class="section-h2-light">Company <span class="accent">Timeline</span></h2>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">Founding</div><div class="timeline-title">GE International LLC Established</div><div class="timeline-desc">Incorporated as a US LLC to formalize cross-border procurement and export operations.</div></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">Early Growth</div><div class="timeline-title">Scrap &amp; Materials Division Launched</div><div class="timeline-desc">Built out ferrous and non-ferrous metals procurement network across initial supplier markets.</div></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">Expansion</div><div class="timeline-title">Heavy Machinery Added</div><div class="timeline-desc">Introduced equipment sourcing with in-house mechanical verification and staging logistics.</div></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">Diversification</div><div class="timeline-title">Electromedical Equipment Division</div><div class="timeline-desc">Entered hospital asset recovery, adding compliance certification and climate-controlled logistics.</div></div>
+        <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">Today</div><div class="timeline-title">150+ Countries Served</div><div class="timeline-desc">Operating across three core divisions with an expanding local services portfolio in planning.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-dark" style="padding-top:0">
+    <div class="container" style="text-align:center">
+      <h2 style="font-family:'DM Sans',sans-serif;font-weight:300;color:#F2EDEA;font-size:clamp(1.5rem,4vw,3rem);letter-spacing:-.02em;margin-bottom:1rem">One Partner. Every Destination.</h2>
+      <p style="color:#737575;font-size:.92rem;max-width:480px;margin:0 auto">From a US-registered base, GE International serves clients across 150+ countries with the consistency and accountability of a fully established institution.</p>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════ PAGE: CONTACT ══════════════════════ -->
+<div id="page-contact" class="page">
+  <section class="dark-header">
+    <div class="glow-orb" style="top:-10%;right:-5%;width:40vw;height:40vw;background:radial-gradient(circle,rgba(40,92,112,.2) 0%,transparent 68%)"></div>
+    <div class="container">
+      <div class="glow-accent-line-light"></div>
+      <h1 class="page-h1">Get In <span class="accent">Touch</span></h1>
+      <p class="page-sub">Tell us about your requirements. We route every enquiry directly to the right division.</p>
+    </div>
+  </section>
+
+  <section class="section-light">
+    <div class="glow-orb" style="top:5%;left:-5%;width:35vw;height:35vw;background:radial-gradient(circle,rgba(81,115,128,.09) 0%,transparent 65%)"></div>
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-form-card">
+          <div id="form-success" class="success-state" style="display:none">
+            <div class="success-icon"><i data-lucide="send" width="22" height="22"></i></div>
+            <div class="success-title">Message Received</div>
+            <div class="success-desc">We'll route your enquiry and respond within one business day.</div>
+          </div>
+          <form id="contact-form" onsubmit="submitForm(event)">
+            <div class="form-row">
+              <div><label class="form-label">Full Name *</label><input class="form-input" name="name" placeholder="John Smith" required /></div>
+              <div><label class="form-label">Company</label><input class="form-input" name="company" placeholder="Acme Corp" /></div>
+            </div>
+            <div class="form-row">
+              <div><label class="form-label">Email Address *</label><input class="form-input" name="email" type="email" placeholder="john@company.com" required /></div>
+              <div><label class="form-label">Phone Number</label><input class="form-input" name="phone" type="tel" placeholder="+1 (555) 000-0000" /></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Inquiry Type *</label>
+              <select class="form-input" name="inquiry" required>
+                <option value="" disabled selected>Select inquiry type...</option>
+                <option>Buying Scrap / Raw Materials</option>
+                <option>Selling Machinery / Equipment</option>
+                <option>Export Logistics &amp; Freight</option>
+                <option>Electromedical Equipment</option>
+                <option>Venture Proposals</option>
+                <option>General Enquiry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message *</label>
+              <textarea class="form-input form-textarea" name="message" placeholder="Describe your requirements..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;justify-content:center;border-radius:9999px">
+              <i data-lucide="send" width="14" height="14"></i> Send Message
+            </button>
+          </form>
+        </div>
+        <div class="contact-side">
+          <div class="contact-info-box">
+            <span class="cred-label">GE International LLC</span>
+            <div class="cred-title">Registered in the United States</div>
+            <div class="cred-sub" style="margin-top:.35rem">Formally incorporated US LLC with full operational capacity for global trade and logistics.</div>
+          </div>
+          <div class="contact-info-item"><div class="contact-icon"><i data-lucide="mail" width="14" height="14"></i></div><div><div class="contact-info-label">Email</div><div class="contact-info-val">info@geinternational.us</div></div></div>
+          <div class="contact-info-item"><div class="contact-icon"><i data-lucide="phone" width="14" height="14"></i></div><div><div class="contact-info-label">Phone</div><div class="contact-info-val">+1 (555) 000-0000</div></div></div>
+          <div class="contact-info-item"><div class="contact-icon"><i data-lucide="map-pin" width="14" height="14"></i></div><div><div class="contact-info-label">Location</div><div class="contact-info-val">United States of America</div></div></div>
+          <div class="contact-info-item"><div class="contact-icon"><i data-lucide="clock" width="14" height="14"></i></div><div><div class="contact-info-label">Business Hours</div><div class="contact-info-val">Mon–Fri, 8:00–18:00 (EST)</div></div></div>
+          <div class="contact-info-item"><div class="contact-icon"><i data-lucide="timer" width="14" height="14"></i></div><div><div class="contact-info-label">Response Time</div><div class="contact-info-val">Within 1 business day</div></div></div>
+          <div class="contact-info-item"><div class="contact-icon"><i data-lucide="alert-circle" width="14" height="14"></i></div><div><div class="contact-info-label">Urgent Shipment Issues</div><div class="contact-info-val">urgent@geinternational.us</div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inquiry Process -->
+  <section class="section-teal">
+    <div class="container">
+      <div class="process-mini-row">
+        <div class="process-mini-item"><div class="process-mini-num">1</div><div><div class="process-mini-title">Submit Your Inquiry</div><div class="process-mini-desc">Fill out the form or email us directly with your requirements.</div></div></div>
+        <div class="process-mini-item"><div class="process-mini-num">2</div><div><div class="process-mini-title">We Respond</div><div class="process-mini-desc">Your inquiry is routed to the right division within one business day.</div></div></div>
+        <div class="process-mini-item"><div class="process-mini-num">3</div><div><div class="process-mini-title">Confirm & Proceed</div><div class="process-mini-desc">We align on pricing, timeline, and logistics before work begins.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-light">
+    <div class="container" style="max-width:800px">
+      <div style="margin-bottom:2rem">
+        <div class="glow-accent-line"></div>
+        <h2 class="section-h2">Frequently Asked <span class="accent">Questions</span></h2>
+      </div>
+      <div id="faq-list">
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span class="faq-q-text">What information do you need to provide a quote?</span><i class="faq-chevron" data-lucide="chevron-down" width="18" height="18"></i></div>
+          <div class="faq-a"><div class="faq-a-text">Product specification, quantity, destination country, and any compliance or certification requirements. The more detail, the faster we can quote.</div></div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span class="faq-q-text">Do you handle customs and export documentation?</span><i class="faq-chevron" data-lucide="chevron-down" width="18" height="18"></i></div>
+          <div class="faq-a"><div class="faq-a-text">Yes — freight forwarding, customs clearance, and export documentation are coordinated end to end as part of our logistics service.</div></div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span class="faq-q-text">Can I sell equipment or materials to GE International directly?</span><i class="faq-chevron" data-lucide="chevron-down" width="18" height="18"></i></div>
+          <div class="faq-a"><div class="faq-a-text">Yes. Select "Selling Machinery / Equipment" or the relevant category in the form and our procurement team will follow up with an evaluation.</div></div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span class="faq-q-text">What's your typical response time?</span><i class="faq-chevron" data-lucide="chevron-down" width="18" height="18"></i></div>
+          <div class="faq-a"><div class="faq-a-text">Standard inquiries receive a response within one business day. Urgent shipment issues are handled same-day via our urgent contact line.</div></div>
+        </div>
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q"><span class="faq-q-text">Do you work with clients outside the United States?</span><i class="faq-chevron" data-lucide="chevron-down" width="18" height="18"></i></div>
+          <div class="faq-a"><div class="faq-a-text">Yes — we operate as a US-registered entity but serve buyers and sellers across 150+ countries.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HQ / Location -->
+  <section class="section-dark">
+    <div class="container">
+      <div class="hq-card">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80&fit=crop" alt="US operations base" loading="lazy"/>
+        <div class="hq-card-overlay"></div>
+        <div class="hq-card-content">
+          <div class="hq-card-label">Registered Base of Operations</div>
+          <div class="hq-card-title">United States of America</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════ FOOTER ══════════════════════ -->
+<footer id="footer">
+  <div class="glow-orb" style="bottom:-40%;right:-10%;width:40vw;height:40vw;background:radial-gradient(circle,rgba(40,92,112,.2) 0%,transparent 65%)"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <div class="footer-grid">
+      <div class="footer-logo">GE International LLC</div>
+      <div class="footer-links">
+        <span class="footer-link" onclick="navigate('services')">Services</span>
+        <span class="footer-link" onclick="navigate('exports')">Global Exports</span>
+        <span class="footer-link" onclick="navigate('ventures')">Ventures</span>
+        <span class="footer-link" onclick="navigate('about')">About</span>
+        <span class="footer-link" onclick="navigate('contact')">Contact</span>
+      </div>
+    </div>
+    <div class="footer-copy">© 2025 GE International LLC. All rights reserved. Registered in the United States of America.</div>
+  </div>
+</footer>
+
+<script>
+// ── WAIT FOR ALL SCRIPTS ──
+window.addEventListener('load', function() {
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+  }
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+
+  // Lenis-like smooth scroll (CSS handles it, plus native smooth for anchors)
+  document.documentElement.style.scrollBehavior = 'smooth';
+
+  // Initial page
+  var hash = location.hash.replace('#','') || 'home';
+  showPage(hash, true);
+  initNavScroll();
+  initMagneticBtns();
+});
+
+// ── ROUTING ──
+var currentPage = 'home';
+var gsapCtx = null;
+
+function navigate(page) {
+  if (page === currentPage) { window.scrollTo({top:0,behavior:'smooth'}); return; }
+  showPage(page, false);
+  history.pushState(null, '', '#' + page);
+}
+
+window.addEventListener('popstate', function() {
+  var page = location.hash.replace('#','') || 'home';
+  showPage(page, true);
+});
+
+function showPage(page, skipPush) {
+  // hide all
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+
+  // show target
+  var target = document.getElementById('page-' + page);
+  if (!target) { page = 'home'; target = document.getElementById('page-home'); }
+  target.classList.add('active');
+  currentPage = page;
+
+  window.scrollTo(0,0);
+
+  // update nav class based on page
+  updateNavStyle();
+
+  // re-render icons
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+
+  // kill previous GSAP context
+  if (gsapCtx) { try { gsapCtx.revert(); } catch(e){} }
+
+  // animate
+  if (typeof gsap !== 'undefined') {
+    if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+    gsapCtx = initPageAnimations(page);
+  }
+}
+
+// ── NAV ──
+function initNavScroll() {
+  window.addEventListener('scroll', updateNavStyle);
+}
+
+function updateNavStyle() {
+  var nav = document.getElementById('navbar');
+  var darkPages = ['home','services','exports','ventures','about','contact'];
+  var isTop = window.scrollY < 60;
+
+  // home hero is dark so stay transparent at top; all other pages have dark headers too
+  if (isTop && darkPages.indexOf(currentPage) !== -1) {
+    nav.className = 'transparent';
+  } else {
+    nav.className = 'glass';
+  }
+}
+
+function openMobile() { document.getElementById('mobile-menu').classList.add('open'); }
+function closeMobile() { document.getElementById('mobile-menu').classList.remove('open'); }
+
+// ── GSAP ANIMATIONS ──
+function initPageAnimations(page) {
+  if (typeof gsap === 'undefined') return null;
+
+  return gsap.context(function() {
+    // Shared: hero heading
+    var anim = document.querySelectorAll('#page-' + page + ' .anim');
+    if (anim.length) {
+      gsap.fromTo(anim, {y:40,opacity:0},{y:0,opacity:1,duration:1,stagger:.12,ease:'power3.out',delay:.15});
+    }
+
+    if (page === 'home') {
+      var h = document.getElementById('hero-heading');
+      var s = document.getElementById('hero-sub');
+      var c = document.getElementById('hero-cta');
+      var st = document.getElementById('hero-stats');
+      var tl = gsap.timeline({defaults:{ease:'power4.out'}});
+      if(h) tl.fromTo(h,{y:60,opacity:0},{y:0,opacity:1,duration:1.2},.1);
+      if(s) tl.fromTo(s,{y:28,opacity:0},{y:0,opacity:1,duration:.9},.75);
+      if(c) tl.fromTo(c,{y:20,opacity:0},{y:0,opacity:1,duration:.7},1.0);
+      if(st) tl.fromTo(st,{y:20,opacity:0},{y:0,opacity:1,duration:.7},1.15);
+
+      // scroll cards
+      var cards = document.getElementById('home-div-cards');
+      if(cards && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(cards.children,{y:50,opacity:0},{y:0,opacity:1,duration:.85,stagger:.13,ease:'power3.out',scrollTrigger:{trigger:cards,start:'top 80%'}});
+      }
+      var expSec = document.getElementById('home-exports');
+      if(expSec && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(expSec,{y:40,opacity:0},{y:0,opacity:1,duration:1,ease:'power3.out',scrollTrigger:{trigger:expSec,start:'top 82%'}});
+      }
+      var ventSec = document.getElementById('home-ventures');
+      if(ventSec && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(ventSec,{y:30,opacity:0},{y:0,opacity:1,duration:.8,ease:'power3.out',scrollTrigger:{trigger:ventSec,start:'top 82%'}});
+      }
+      var indChips = document.getElementById('home-industries');
+      if(indChips && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(indChips.querySelectorAll('.industry-chip'),{y:30,opacity:0},{y:0,opacity:1,duration:.7,stagger:.07,ease:'power3.out',scrollTrigger:{trigger:indChips,start:'top 82%'}});
+      }
+      var whyCards = document.getElementById('home-why-cards');
+      if(whyCards && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(whyCards.children,{y:30,opacity:0},{y:0,opacity:1,duration:.7,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:whyCards,start:'top 82%'}});
+      }
+      var procSec = document.getElementById('home-process');
+      if(procSec && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(procSec.querySelectorAll('.process-step'),{x:-30,opacity:0},{x:0,opacity:1,duration:.7,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:procSec,start:'top 80%'}});
+      }
+      var reachSec = document.getElementById('home-reach');
+      if(reachSec && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(reachSec,{y:30,opacity:0},{y:0,opacity:1,duration:.8,ease:'power3.out',scrollTrigger:{trigger:reachSec,start:'top 82%'}});
+        reachSec.querySelectorAll('[data-counter]').forEach(function(el) {
+          var target = parseInt(el.getAttribute('data-counter'));
+          var suffix = el.getAttribute('data-suffix') || '';
+          var obj = {val:0};
+          gsap.to(obj,{val:target,duration:2,ease:'power2.out',
+            onUpdate:function(){el.textContent=Math.round(obj.val).toLocaleString()+suffix;},
+            scrollTrigger:{trigger:el,start:'top 85%',once:true}
+          });
+        });
+      }
+      var testiCards = document.querySelector('#home-testimonials .grid-3');
+      if(testiCards && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(testiCards.children,{y:30,opacity:0},{y:0,opacity:1,duration:.7,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:testiCards,start:'top 82%'}});
+      }
+      var ctaSec = document.getElementById('home-cta');
+      if(ctaSec && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(ctaSec.querySelector('.cta-banner-inner'),{y:24,opacity:0},{y:0,opacity:1,duration:.8,ease:'power3.out',scrollTrigger:{trigger:ctaSec,start:'top 80%'}});
+      }
+    }
+
+    if (page === 'services') {
+      var svcCards = document.getElementById('svc-cards');
+      if(svcCards && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(svcCards.children,{y:50,opacity:0},{y:0,opacity:1,duration:.9,stagger:.15,ease:'power3.out',scrollTrigger:{trigger:svcCards,start:'top 80%'}});
+      }
+    }
+
+    if (page === 'exports') {
+      // counters
+      document.querySelectorAll('[data-counter]').forEach(function(el) {
+        var target = parseInt(el.getAttribute('data-counter'));
+        var suffix = el.getAttribute('data-suffix') || '';
+        var obj = {val:0};
+        if(typeof ScrollTrigger !== 'undefined') {
+          gsap.to(obj,{val:target,duration:2,ease:'power2.out',
+            onUpdate:function(){el.textContent=Math.round(obj.val).toLocaleString()+suffix;},
+            scrollTrigger:{trigger:el,start:'top 85%',once:true}
+          });
+        } else {
+          el.textContent = target.toLocaleString() + suffix;
+        }
+      });
+      var gallery = document.getElementById('export-gallery');
+      if(gallery && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(gallery.children,{y:30,opacity:0},{y:0,opacity:1,duration:.8,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:gallery,start:'top 82%'}});
+      }
+      var caps = document.getElementById('export-caps');
+      if(caps && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(caps.children,{y:40,opacity:0},{y:0,opacity:1,duration:.8,stagger:.12,ease:'power3.out',scrollTrigger:{trigger:caps,start:'top 80%'}});
+      }
+      var proc = document.getElementById('export-process');
+      if(proc && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(proc.querySelectorAll('.process-step'),{x:-30,opacity:0},{x:0,opacity:1,duration:.7,stagger:.14,ease:'power3.out',scrollTrigger:{trigger:proc,start:'top 80%'}});
+      }
+    }
+
+    if (page === 'ventures') {
+      var vCards = document.getElementById('venture-cards');
+      if(vCards && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(vCards.children,{y:40,opacity:0},{y:0,opacity:1,duration:.8,stagger:.11,ease:'power3.out',scrollTrigger:{trigger:vCards,start:'top 80%'}});
+      }
+      document.querySelectorAll('#page-ventures .roadmap-phase').forEach(function(el, i) {
+        if(typeof ScrollTrigger !== 'undefined') {
+          gsap.fromTo(el,{x:-20,opacity:0},{x:0,opacity:1,duration:.6,delay:i*.08,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+        }
+      });
+      var targetList = document.querySelector('#page-ventures .target-list');
+      if(targetList && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(targetList.children,{y:20,opacity:0},{y:0,opacity:1,duration:.6,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:targetList,start:'top 85%'}});
+      }
+    }
+
+    if (page === 'about') {
+      var mvCards = document.querySelector('#page-about .mv-grid');
+      if(mvCards && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(mvCards.children,{y:30,opacity:0},{y:0,opacity:1,duration:.7,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:mvCards,start:'top 82%'}});
+      }
+      document.querySelectorAll('#page-about .grid-3').forEach(function(grid) {
+        if(typeof ScrollTrigger !== 'undefined') {
+          gsap.fromTo(grid.children,{y:25,opacity:0},{y:0,opacity:1,duration:.6,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:grid,start:'top 85%'}});
+        }
+      });
+      var tItems = document.querySelectorAll('#page-about .timeline-item');
+      if(tItems.length && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(tItems,{x:-20,opacity:0},{x:0,opacity:1,duration:.6,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:'#page-about .timeline',start:'top 82%'}});
+      }
+    }
+
+    if (page === 'contact') {
+      var faqItems = document.querySelectorAll('#faq-list .faq-item');
+      if(faqItems.length && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(faqItems,{y:16,opacity:0},{y:0,opacity:1,duration:.5,stagger:.06,ease:'power3.out',scrollTrigger:{trigger:'#faq-list',start:'top 85%'}});
+      }
+      var procMini = document.querySelector('#page-contact .process-mini-row');
+      if(procMini && typeof ScrollTrigger !== 'undefined') {
+        gsap.fromTo(procMini.children,{y:20,opacity:0},{y:0,opacity:1,duration:.6,stagger:.1,ease:'power3.out',scrollTrigger:{trigger:procMini,start:'top 85%'}});
+      }
+    }
+  });
+}
+
+// ── MAGNETIC BUTTONS ──
+function initMagneticBtns() {
+  document.addEventListener('mousemove', function(e) {
+    document.querySelectorAll('.btn-primary, .btn-outline, .nav-cta').forEach(function(btn) {
+      var rect = btn.getBoundingClientRect();
+      var x = e.clientX - rect.left - rect.width/2;
+      var y = e.clientY - rect.top - rect.height/2;
+      var dist = Math.sqrt(x*x + y*y);
+      if (dist < 80) {
+        btn.style.transform = 'translate('+(x*.28)+'px,'+(y*.28)+'px)';
+      } else {
+        btn.style.transform = '';
+      }
+    });
+  });
+}
+
+// ── LIGHTBOX GALLERY ──
+var galleryData = {
+  scrap: [
+    {src:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=85&fit=crop', alt:'Scrap Metal'},
+    {src:'https://images.unsplash.com/photo-1671362935207-d9abfc5b9509?w=1400&q=85&fit=crop', alt:'Metal Scrap Pile'},
+    {src:'https://images.unsplash.com/photo-1761665698795-ac9df3438b74?w=1400&q=85&fit=crop', alt:'Rusty Metal Debris'},
+    {src:'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1400&q=85&fit=crop', alt:'Shipping Containers'}
+  ],
+  machinery: [
+    {src:'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1400&q=85&fit=crop', alt:'Heavy Machinery'},
+    {src:'https://images.unsplash.com/photo-1780389098001-e641e50aeebd?w=1400&q=85&fit=crop', alt:'Construction Equipment'},
+    {src:'https://images.unsplash.com/photo-1689596312049-0a21da693515?w=1400&q=85&fit=crop', alt:'Aerial Construction Site'},
+    {src:'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c1?w=1400&q=85&fit=crop', alt:'Equipment Shipping'}
+  ],
+  medical: [
+    {src:'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1400&q=85&fit=crop', alt:'Electromedical Equipment'},
+    {src:'https://images.unsplash.com/photo-1723513198534-c3cd2e033815?w=1400&q=85&fit=crop', alt:'Hospital Monitors'},
+    {src:'https://images.unsplash.com/photo-1643264560215-9c2f72485ca1?w=1400&q=85&fit=crop', alt:'Wall-Mounted Medical Equipment'},
+    {src:'https://images.unsplash.com/photo-1746842421936-461e16dd8238?w=1400&q=85&fit=crop', alt:'Medical Tools'}
+  ]
+};
+var currentGalleryKey = null, currentGalleryIdx = 0;
+function openLightbox(key, idx) {
+  currentGalleryKey = key;
+  currentGalleryIdx = idx;
+  renderLightbox();
+  document.getElementById('lightbox').classList.add('open');
+}
+function renderLightbox() {
+  var arr = galleryData[currentGalleryKey];
+  var item = arr[currentGalleryIdx];
+  var img = document.getElementById('lightbox-img');
+  img.src = item.src;
+  img.alt = item.alt;
+  document.getElementById('lightbox-counter').textContent = (currentGalleryIdx + 1) + ' / ' + arr.length;
+}
+function lightboxNav(dir) {
+  var arr = galleryData[currentGalleryKey];
+  currentGalleryIdx = (currentGalleryIdx + dir + arr.length) % arr.length;
+  renderLightbox();
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e) {
+  var lb = document.getElementById('lightbox');
+  if (!lb || !lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') lightboxNav(1);
+  if (e.key === 'ArrowLeft') lightboxNav(-1);
+});
+
+// ── FAQ ACCORDION ──
+function toggleFaq(el) {
+  var wasOpen = el.classList.contains('open');
+  el.parentElement.querySelectorAll('.faq-item.open').forEach(function(item) { item.classList.remove('open'); });
+  if (!wasOpen) el.classList.add('open');
+}
+
+// ── CONTACT FORM ──
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+</script>
+</body>
+</html>
